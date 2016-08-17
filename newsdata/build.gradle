@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "eu.fiveminutes.news_app_2"
+    applicationId "eu.fiveminutes.newsdata"
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
@@ -20,9 +20,7 @@ android {
 }
 
 dependencies {
+    compile 'com.android.support:appcompat-v7:23.+'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.jakewharton:butterknife:8.2.1'
-    apt 'com.jakewharton:butterknife-compiler:8.2.1'
 }
