@@ -9,6 +9,7 @@ import eu.fiveminutes.newsapp.api.ObjectGraph;
  */
 public final class NewsApp extends Application {
 
+
     private ObjectGraph objectGraph;
     @Override
     public void onCreate() {
