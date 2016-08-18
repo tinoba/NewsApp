@@ -1,1 +1,1 @@
-include ':app', ':newsmodel', ':newsdata', ':newsui'
+include ':app'

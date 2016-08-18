@@ -1,9 +1,11 @@
-package eu.fiveminutes.news_app_2;
+package NewsUI;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-final public class MainActivity extends AppCompatActivity {
+import eu.fiveminutes.news_app_2.R;
+
+public final class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
