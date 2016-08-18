@@ -15,7 +15,7 @@ public final class NetworkService {
         this(BASE_URL);
     }
 
-    public NetworkService(String baseUrl) {
+    public NetworkService(final String baseUrl) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
