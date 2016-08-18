@@ -1,7 +1,9 @@
 package eu.fiveminutes.newsapp.ui;
 
 import android.util.Log;
+import android.widget.Button;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +25,16 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
     private final ApiConverter apiConverter;
     private final NetworkService service;
 
+    private WeakReference<NewsListView> newsListViewWeakReference;
+
     public NewsListPresenterImpl(ApiConverter apiConverter, NetworkService service) {
         this.apiConverter = apiConverter;
         this.service = service;
+    }
+
+    @Override
+    public void setView(final NewsListView view) {
+        newsListViewWeakReference = new WeakReference<>(view);
     }
 
     @Override
@@ -34,8 +43,15 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
         call.enqueue(new Callback<ApiNews>() {
             @Override
             public void onResponse(Call<ApiNews> call, Response<ApiNews> response) {
-                //  TODO  show in UI
-                //      apiConverter.convertToNewsArticles(response.body().response.docs);
+
+                apiConverter.convertToNewsArticles(response.body().response.docs);
+                //fsdjkalfjasdk
+
+                final NewsListView view = newsListViewWeakReference.get();
+                if (view != null) {
+                    //TODO
+                    view.renderView(null);
+                }
             }
 
             @Override

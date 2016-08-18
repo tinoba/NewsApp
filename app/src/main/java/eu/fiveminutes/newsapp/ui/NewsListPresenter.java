@@ -5,5 +5,7 @@ package eu.fiveminutes.newsapp.ui;
  */
 public interface NewsListPresenter {
 
+    void setView(NewsListView view);
+
     void loadNews();
 }
