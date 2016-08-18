@@ -29,12 +29,12 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
     }
 
     @Override
-    public void loadRetroData() {
+    public void loadNews() {
         Call<ApiNews> call = service.getAPI().getNews();
         call.enqueue(new Callback<ApiNews>() {
             @Override
             public void onResponse(Call<ApiNews> call, Response<ApiNews> response) {
-                //    show in UI
+                //  TODO  show in UI
                 //      apiConverter.convertToNewsArticles(response.body().response.docs);
             }
 

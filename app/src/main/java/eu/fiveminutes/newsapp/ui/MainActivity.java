@@ -12,7 +12,6 @@ import eu.fiveminutes.newsapp.application.NewsApp;
 public final class MainActivity extends AppCompatActivity {
 
     private ObjectGraph objectGraph;
-
     private NewsListPresenter presenter;
 
     @Override
@@ -26,6 +25,6 @@ public final class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnDownlaod)
     public void download() {
-        presenter.loadRetroData();
+        presenter.loadNews();
     }
 }

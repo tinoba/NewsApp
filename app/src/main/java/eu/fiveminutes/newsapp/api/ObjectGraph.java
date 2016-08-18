@@ -5,14 +5,11 @@ import eu.fiveminutes.newsapp.api.converter.ApiConverterImpl;
 import eu.fiveminutes.newsapp.ui.NewsListPresenter;
 import eu.fiveminutes.newsapp.ui.NewsListPresenterImpl;
 
-/**
- * Created by tinoba on 18.8.2016..
- */
+
 public final class ObjectGraph {
 
     private ApiConverter apiConverter;
     private NetworkService networkService;
-
 
     public NetworkService getNetworkService() {
         if (networkService == null) {
@@ -29,7 +26,6 @@ public final class ObjectGraph {
 
         return apiConverter;
     }
-
 
     public NewsListPresenter createNewsListPresenter() {
         return new NewsListPresenterImpl(getApiConverter(), getNetworkService());

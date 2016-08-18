@@ -3,6 +3,7 @@ package eu.fiveminutes.newsapp.api;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by tinoba on 18.8.2016..
@@ -22,19 +23,19 @@ public final class ApiDocs {
     public String printPage;
 
     @SerializedName("blog")
-    public ArrayList<Object> blog;
+    public List<Object> blog;
 
     @SerializedName("source")
     public String source;
 
     @SerializedName("multimedia")
-    public ArrayList<ApiMultimedia> multimedia;
+    public List<ApiMultimedia> multimedia;
 
     @SerializedName("headline")
     public ApiHeadline headline;
 
     @SerializedName("keywords")
-    public ArrayList<ApiKeywords> keywords;
+    public List<ApiKeywords> keywords;
 
     @SerializedName("pub_date")
     public String pubDate;

@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by tinoba on 18.8.2016..
  */
 public class ApiNews {
+
     @SerializedName("response")
     public  ApiResponse response;
 

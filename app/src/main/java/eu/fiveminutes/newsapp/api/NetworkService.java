@@ -7,11 +7,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by tinoba on 18.8.2016..
  */
 public final class NetworkService {
-    private static String baseUrl = "http://api.nytimes.com";
-    private NetworkAPI networkAPI;
+
+    public static final String BASE_URL = "http://api.nytimes.com";
+    private final NetworkAPI networkAPI;
 
     public NetworkService() {
-        this(baseUrl);
+        this(BASE_URL);
     }
 
     public NetworkService(String baseUrl) {
@@ -19,7 +20,6 @@ public final class NetworkService {
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
         networkAPI = retrofit.create(NetworkAPI.class);
     }
 
