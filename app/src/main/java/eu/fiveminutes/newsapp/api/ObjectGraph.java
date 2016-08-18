@@ -1,5 +1,7 @@
 package eu.fiveminutes.newsapp.api;
 
+import eu.fiveminutes.newsapp.api.converter.ApiConverter;
+import eu.fiveminutes.newsapp.api.converter.ApiConverterImpl;
 import eu.fiveminutes.newsapp.ui.NewsListPresenter;
 import eu.fiveminutes.newsapp.ui.NewsListPresenterImpl;
 
@@ -7,10 +9,12 @@ import eu.fiveminutes.newsapp.ui.NewsListPresenterImpl;
  * Created by tinoba on 18.8.2016..
  */
 public final class ObjectGraph {
+
+    private ApiConverter apiConverter;
     private NetworkService networkService;
 
 
-    public NetworkService getNetworkService(){
+    public NetworkService getNetworkService() {
         if (networkService == null) {
             networkService = new NetworkService();
         }
@@ -18,7 +22,16 @@ public final class ObjectGraph {
         return networkService;
     }
 
+    public ApiConverter getApiConverter() {
+        if (apiConverter == null) {
+            apiConverter = new ApiConverterImpl();
+        }
+
+        return apiConverter;
+    }
+
+
     public NewsListPresenter createNewsListPresenter() {
-        return new NewsListPresenterImpl(getNetworkService());
+        return new NewsListPresenterImpl(getApiConverter(), getNetworkService());
     }
 }

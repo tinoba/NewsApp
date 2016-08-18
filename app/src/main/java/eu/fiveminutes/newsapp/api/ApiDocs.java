@@ -1,53 +1,71 @@
 package eu.fiveminutes.newsapp.api;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 /**
  * Created by tinoba on 18.8.2016..
  */
 public final class ApiDocs {
-    public final String web_url;
-    public final String snippet;
-    public final String lead_paragraph;
-    public final String print_page;
-    public final ArrayList<Object> blog;
-    public final String source;
-    public final ArrayList<ApiMultimedia> multimedia;
-    public final ApiHeadline headline;
-    public final ArrayList<ApiKeywords> keywords;
-    public final String pub_date;
-    public final String document_type;
-    public final String news_desk;
-    public final String section_name;
-    public final Object subsection_name;
-    public final ApiByline byline;
-    public final String type_of_material;
-    public final String _id;
-    public final Object word_count;
-    public final Object slideshow_credits;
 
-    public ApiDocs(String web_url, String snippet, String lead_paragraph, String print_page, ArrayList<Object> blog,
-                   String source, ArrayList<ApiMultimedia> multimedia, ApiHeadline headline, ArrayList<ApiKeywords> keywords,
-                   String pub_date, String document_type, String news_desk, String section_name, Object subsection_name, ApiByline byline,
-                   String type_of_material, String _id, Object word_count, Object slideshow_credits) {
-        this.web_url = web_url;
-        this.snippet = snippet;
-        this.lead_paragraph = lead_paragraph;
-        this.print_page = print_page;
-        this.blog = blog;
-        this.source = source;
-        this.multimedia = multimedia;
-        this.headline = headline;
-        this.keywords = keywords;
-        this.pub_date = pub_date;
-        this.document_type = document_type;
-        this.news_desk = news_desk;
-        this.section_name = section_name;
-        this.subsection_name = subsection_name;
-        this.byline = byline;
-        this.type_of_material = type_of_material;
-        this._id = _id;
-        this.word_count = word_count;
-        this.slideshow_credits = slideshow_credits;
-    }
+    @SerializedName("web_url")
+    public String webUrl;
+
+    @SerializedName("snippet")
+    public String snippet;
+
+    @SerializedName("lead_paragraph")
+    public String leadParagraph;
+
+    @SerializedName("print_page")
+    public String printPage;
+
+    @SerializedName("blog")
+    public ArrayList<Object> blog;
+
+    @SerializedName("source")
+    public String source;
+
+    @SerializedName("multimedia")
+    public ArrayList<ApiMultimedia> multimedia;
+
+    @SerializedName("headline")
+    public ApiHeadline headline;
+
+    @SerializedName("keywords")
+    public ArrayList<ApiKeywords> keywords;
+
+    @SerializedName("pub_date")
+    public String pubDate;
+
+    @SerializedName("document_type")
+    public String documentType;
+
+    @SerializedName("news_desk")
+    public String newsDesk;
+
+    @SerializedName("section_name")
+    public String sectionName;
+
+    @SerializedName("subsection_name")
+    public Object subsectionName;
+
+    @SerializedName("byline")
+    public ApiByline byline;
+
+    @SerializedName("type_of_material")
+    public String typeOfMaterial;
+
+    @SerializedName("_id")
+    public String id;
+
+    @SerializedName("word_count")
+    public Object wordCount;
+
+    @SerializedName("slideshow_credits")
+    public Object slideshowCredits;
+
+    @SerializedName("abstract")
+    public Object abstractText;
 }

@@ -20,11 +20,12 @@ public final class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        objectGraph =((NewsApp)getApplication()).getObjectGraph();
+        objectGraph = ((NewsApp) getApplication()).getObjectGraph();
         presenter = objectGraph.createNewsListPresenter();
     }
+
     @OnClick(R.id.btnDownlaod)
-    public void download(){
+    public void download() {
         presenter.loadRetroData();
     }
 }

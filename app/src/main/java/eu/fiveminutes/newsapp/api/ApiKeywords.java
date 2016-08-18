@@ -1,18 +1,21 @@
 package eu.fiveminutes.newsapp.api;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by tinoba on 18.8.2016..
  */
 public final class ApiKeywords {
-    public final String rank;
-    public final String is_major;
-    public final String name;
-    public final String value;
+    @SerializedName("rank")
+    public String rank;
 
-    public ApiKeywords(String rank, String is_major, String name, String value) {
-        this.rank = rank;
-        this.is_major = is_major;
-        this.name = name;
-        this.value = value;
-    }
+    @SerializedName("is_major")
+    public String isMajor;
+
+    @SerializedName("name")
+    public String name;
+
+    @SerializedName("value")
+    public String value;
+
 }

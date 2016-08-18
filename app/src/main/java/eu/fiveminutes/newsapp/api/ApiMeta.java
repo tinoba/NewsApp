@@ -1,16 +1,18 @@
 package eu.fiveminutes.newsapp.api;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by tinoba on 18.8.2016..
  */
 public final class ApiMeta {
-    public final String hits;
-    public final String time;
-    public final String offset;
+    @SerializedName("hits")
+    public String hits;
 
-    public ApiMeta(String hits, String time, String offset){
-        this.hits = hits;
-        this.time = time;
-        this.offset = offset;
-    }
+    @SerializedName("time")
+    public String time;
+
+    @SerializedName("offset")
+    public String offset;
+
 }

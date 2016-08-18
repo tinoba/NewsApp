@@ -1,20 +1,24 @@
 package eu.fiveminutes.newsapp.api;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by tinoba on 18.8.2016..
  */
 public final class ApiPerson {
-    public final String organization;
-    public final String role;
-    public final String firstname;
-    public final String rank;
-    public final String lastname;
+    @SerializedName("organization")
+    public String organization;
 
-    public ApiPerson(String organization, String role, String firstname, String rank, String lastname) {
-        this.organization = organization;
-        this.role = role;
-        this.firstname = firstname;
-        this.rank = rank;
-        this.lastname = lastname;
-    }
+    @SerializedName("role")
+    public String role;
+
+    @SerializedName("firstname")
+    public String firstName;
+
+    @SerializedName("rank")
+    public String rank;
+
+    @SerializedName("lastname")
+    public String lastName;
+
 }
