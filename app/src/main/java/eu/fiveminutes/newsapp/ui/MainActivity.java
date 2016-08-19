@@ -17,11 +17,13 @@ import eu.fiveminutes.newsapp.model.NewsArticle;
 
 public final class MainActivity extends AppCompatActivity implements NewsListView {
 
-    private ObjectGraph objectGraph;
-    private NewsListPresenter presenter;
-
     @BindView(R.id.listViewNews)
     ListView listViewNews;
+
+    private ObjectGraph objectGraph;
+
+    private NewsListPresenter presenter;
+    private NewsListAdapter newsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,9 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
         ButterKnife.bind(this);
         objectGraph = ((NewsApp) getApplication()).getObjectGraph();
         presenter = objectGraph.createNewsListPresenter();
+
+        newsAdapter = new NewsListAdapter(this);
+        listViewNews.setAdapter(newsAdapter);
 
         presenter.setView(this);
     }
@@ -40,12 +45,12 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
     }
 
     public void showNews(List<NewsArticle> articles){
-        NewsListAdapter newsAdapter = new NewsListAdapter(this,articles);
-        listViewNews.setAdapter(newsAdapter);
+        newsAdapter.clear();
+        newsAdapter.addAll(articles);
     }
 
     @Override
-    public void renderView(NewsListViewModel viewModel) {
-
+    public void renderView(List<NewsArticle> newsArticles) {
+        showNews(newsArticles);
     }
 }

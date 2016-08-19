@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -14,18 +15,18 @@ import butterknife.ButterKnife;
 import eu.fiveminutes.news_app_2.R;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 
-public class NewsListAdapter extends ArrayAdapter<NewsArticle>{
+public final class NewsListAdapter extends ArrayAdapter<NewsArticle> {
 
-    private final List<NewsArticle> articles;
+    private final LayoutInflater inflater;
 
-    public NewsListAdapter(Context context, List<NewsArticle> articles) {
-        super(context, R.layout.news_list_row,articles);
-        this.articles = articles;
+    public NewsListAdapter(Context context) {
+        super(context, R.layout.news_list_row, new ArrayList<NewsArticle>());
+        inflater = LayoutInflater.from(getContext());
     }
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(getContext());
+
         final ViewHolder holder;
         if (view != null) {
             holder = (ViewHolder) view.getTag();
@@ -35,19 +36,15 @@ public class NewsListAdapter extends ArrayAdapter<NewsArticle>{
             view.setTag(holder);
         }
 
-        holder.txtHeadLine.setText(articles.get(position).mainHeadline);
-        holder.txtParagraph.setText(articles.get(position).snippet);
-        holder.txtUrl.setText(articles.get(position).webUrl);
-
+        final NewsArticle article = getItem(position);
+        holder.txtHeadLine.setText(article.mainHeadline);
         return view;
     }
-    static class ViewHolder {
+
+    static final class ViewHolder {
+
         @BindView(R.id.txtHeadline)
         TextView txtHeadLine;
-        @BindView(R.id.txtParagraph)
-        TextView txtParagraph;
-        @BindView(R.id.txtUrl)
-        TextView txtUrl;
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);

@@ -43,14 +43,9 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
         call.enqueue(new Callback<ApiNews>() {
             @Override
             public void onResponse(Call<ApiNews> call, Response<ApiNews> response) {
-
-                apiConverter.convertToNewsArticles(response.body().response.docs);
-                //fsdjkalfjasdk
-
                 final NewsListView view = newsListViewWeakReference.get();
                 if (view != null) {
-                    //TODO
-                    view.renderView(null);
+                    view.renderView(apiConverter.convertToNewsArticles(response.body().response.docs));
                 }
             }
 
