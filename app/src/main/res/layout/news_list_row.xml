@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Large Text"
+        android:text="@string/txtHeadline"
         android:id="@+id/txtHeadline"
         android:layout_weight="0.08"
         android:gravity="center" />
