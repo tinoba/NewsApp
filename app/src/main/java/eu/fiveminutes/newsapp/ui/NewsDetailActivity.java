@@ -23,12 +23,12 @@ public class NewsDetailActivity extends AppCompatActivity {
     public NewsArticleParcelable articleParcelable;
 
     @BindView(R.id.webViewNews)
-    WebView webWiewNews;
+    protected WebView webWiewNews;
 
     public static Intent createIntent(final Context context, final NewsArticle article) {
-        Intent intent = new Intent(context,NewsDetailActivity.class);
-        NewsArticleParcelable articleParceable = new NewsArticleParcelable(article);
-        intent.putExtra(NEWS_DETAIL,articleParceable);
+        Intent intent = new Intent(context, NewsDetailActivity.class);
+        NewsArticleParcelable articleParcelable = new NewsArticleParcelable(article);
+        intent.putExtra(NEWS_DETAIL, articleParcelable);
         return intent;
     }
 

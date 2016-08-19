@@ -21,7 +21,7 @@ import eu.fiveminutes.newsapp.model.NewsArticle;
 public final class MainActivity extends AppCompatActivity implements NewsListView {
 
     @BindView(R.id.listViewNews)
-    ListView listViewNews;
+    protected ListView listViewNews;
 
     private ObjectGraph objectGraph;
 
