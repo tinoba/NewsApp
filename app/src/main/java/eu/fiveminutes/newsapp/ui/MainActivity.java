@@ -44,9 +44,10 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
         presenter.loadNews();
     }
 
-    public void showNews(List<NewsArticle> articles){
+    public void showNews(List<NewsArticle> articles) {
         newsAdapter.clear();
         newsAdapter.addAll(articles);
+        listViewNews.deferNotifyDataSetChanged();
     }
 
     @Override
