@@ -15,12 +15,11 @@ import butterknife.ButterKnife;
 import eu.fiveminutes.news_app_2.R;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 
-public class NewsDetailActivity extends AppCompatActivity {
+public final class NewsDetailActivity extends AppCompatActivity {
 
     private static final String NEWS_DETAIL = "NEWS DETAIL";
 
     public NewsArticle article;
-    public NewsArticleParcelable articleParcelable;
 
     @BindView(R.id.webViewNews)
     protected WebView webWiewNews;
@@ -39,7 +38,7 @@ public class NewsDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         final Intent intent = getIntent();
-        articleParcelable = intent.getExtras().getParcelable(NEWS_DETAIL);
+        final NewsArticleParcelable articleParcelable = intent.getExtras().getParcelable(NEWS_DETAIL);
         article = articleParcelable.toMewsArticle();
         webWiewNews.setWebViewClient(new WebViewClient());
     }
