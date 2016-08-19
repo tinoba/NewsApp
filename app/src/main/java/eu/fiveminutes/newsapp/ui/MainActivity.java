@@ -1,7 +1,10 @@
 package eu.fiveminutes.newsapp.ui;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -32,15 +35,24 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
         ButterKnife.bind(this);
         objectGraph = ((NewsApp) getApplication()).getObjectGraph();
         presenter = objectGraph.createNewsListPresenter();
-
         newsAdapter = new NewsListAdapter(this);
         listViewNews.setAdapter(newsAdapter);
 
         presenter.setView(this);
+
+        listViewNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final NewsArticle article = newsAdapter.getItem(position);
+                final Intent intent = NewsDetailActivity.createIntent(MainActivity.this,article);
+                startActivity(intent);
+            }
+        });
     }
 
-    @OnClick(R.id.btnDownlaod)
-    public void download() {
+    @Override
+    protected void onResume() {
+        super.onResume();
         presenter.loadNews();
     }
 

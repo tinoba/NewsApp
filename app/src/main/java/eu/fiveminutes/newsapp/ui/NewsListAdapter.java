@@ -1,10 +1,13 @@
 package eu.fiveminutes.newsapp.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -12,6 +15,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
 import eu.fiveminutes.news_app_2.R;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 
@@ -45,6 +50,9 @@ public final class NewsListAdapter extends ArrayAdapter<NewsArticle> {
 
         @BindView(R.id.txtHeadline)
         TextView txtHeadLine;
+
+   /*     @BindView(R.id.listViewNews)
+        ListView listViewNews;*/
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);

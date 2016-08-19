@@ -16,10 +16,11 @@ public final class NetworkService {
     }
 
     public NetworkService(final String baseUrl) {
-        Retrofit retrofit = new Retrofit.Builder()
+        final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
         networkAPI = retrofit.create(NetworkAPI.class);
     }
 
