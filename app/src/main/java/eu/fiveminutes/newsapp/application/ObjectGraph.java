@@ -1,6 +1,7 @@
 package eu.fiveminutes.newsapp.application;
 
 import android.app.Application;
+import android.net.ConnectivityManager;
 
 import eu.fiveminutes.newsapp.api.NetworkService;
 import eu.fiveminutes.newsapp.api.converter.ApiConverter;
@@ -10,8 +11,8 @@ import eu.fiveminutes.newsapp.business.dao.ArticleRepositoryImpl;
 import eu.fiveminutes.newsapp.business.dao.DatabaseHelper;
 import eu.fiveminutes.newsapp.business.dao.NewsDao;
 import eu.fiveminutes.newsapp.business.dao.NewsDaoImpl;
-import eu.fiveminutes.newsapp.ui.presenter.NetworkInformation;
-import eu.fiveminutes.newsapp.ui.presenter.NetworkInformationImpl;
+import eu.fiveminutes.newsapp.utils.NetworkInformation;
+import eu.fiveminutes.newsapp.utils.NetworkInformationImpl;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenterImpl;
 
@@ -30,9 +31,13 @@ public final class ObjectGraph {
 
     public NetworkInformation getNetworkInformation(){
         if (networkInformation == null){
-            networkInformation = new NetworkInformationImpl();
+            networkInformation = new NetworkInformationImpl(getConnectivityManager());
         }
         return networkInformation;
+    }
+
+    public ConnectivityManager getConnectivityManager() {
+        return (ConnectivityManager) application.getSystemService(application.CONNECTIVITY_SERVICE);
     }
 
     public ArticleRepository getArticleRepository(){
@@ -64,6 +69,6 @@ public final class ObjectGraph {
     }
 
     public NewsListPresenter createNewsListPresenter() {
-        return new NewsListPresenterImpl(getApiConverter(), getNetworkService(),getArticleRepository());
+        return new NewsListPresenterImpl(getApiConverter(), getNetworkService(),getArticleRepository(),getNetworkInformation());
     }
 }

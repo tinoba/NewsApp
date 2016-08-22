@@ -9,5 +9,4 @@ public interface NewsListPresenter {
 
     void setView(final NewsListView view);
 
-    void loadNewsDao();
 }

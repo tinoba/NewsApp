@@ -11,6 +11,7 @@ import eu.fiveminutes.newsapp.api.NetworkService;
 import eu.fiveminutes.newsapp.api.converter.ApiConverter;
 import eu.fiveminutes.newsapp.business.dao.ArticleRepository;
 import eu.fiveminutes.newsapp.model.NewsArticle;
+import eu.fiveminutes.newsapp.utils.NetworkInformation;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,13 +21,15 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
     private final ApiConverter apiConverter;
     private final NetworkService service;
     private final ArticleRepository articleRepository;
+    private final NetworkInformation networkInformation;
 
     private WeakReference<NewsListView> newsListViewWeakReference;
 
-    public NewsListPresenterImpl(ApiConverter apiConverter, NetworkService service, ArticleRepository articleRepository) {
+    public NewsListPresenterImpl(ApiConverter apiConverter, NetworkService service, ArticleRepository articleRepository, NetworkInformation networkInformation) {
         this.apiConverter = apiConverter;
         this.service = service;
         this.articleRepository = articleRepository;
+        this.networkInformation = networkInformation;
     }
 
     @Override
@@ -34,8 +37,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
         newsListViewWeakReference = new WeakReference<>(view);
     }
 
-    @Override
-    public void loadNews() {
+    private void getDataFromApi(){
         Call<ApiNews> call = service.getAPI().getNews();
         call.enqueue(new Callback<ApiNews>() {
             @Override
@@ -54,10 +56,18 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
         });
     }
 
-    @Override
-    public void loadNewsDao() {
+    private void getDataFromDatabase(){
         final NewsListView view = newsListViewWeakReference.get();
         view.renderView(articleRepository.getAllNews());
+    }
+
+    @Override
+    public void loadNews() {
+        if (networkInformation.isConnected()){
+            getDataFromApi();
+        } else {
+            getDataFromDatabase();
+        }
     }
 
     public void addNewTask(final List<NewsArticle> articles) {
