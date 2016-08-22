@@ -4,7 +4,7 @@ import java.util.List;
 
 import eu.fiveminutes.newsapp.model.NewsArticle;
 
-public class ArticleRepositoryImpl implements ArticleRepository {
+public final class ArticleRepositoryImpl implements ArticleRepository {
 
     private final NewsDao newsDao;
 

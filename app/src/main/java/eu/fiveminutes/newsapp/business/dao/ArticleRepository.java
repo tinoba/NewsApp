@@ -8,7 +8,7 @@ public interface ArticleRepository {
 
     List<NewsArticle> getAllNews();
 
-    void insertNews(NewsArticle article);
+    void insertNews(final NewsArticle article);
 
     void clearNewsTable();
 }
