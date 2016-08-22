@@ -51,9 +51,6 @@ public final class NewsListAdapter extends ArrayAdapter<NewsArticle> {
         @BindView(R.id.txtHeadline)
         TextView txtHeadLine;
 
-   /*     @BindView(R.id.listViewNews)
-        ListView listViewNews;*/
-
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }

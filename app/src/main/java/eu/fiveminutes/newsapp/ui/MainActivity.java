@@ -11,6 +11,7 @@ import android.widget.ListView;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnItemClick;
 import eu.fiveminutes.newsapp.api.ObjectGraph;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -39,15 +40,13 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
         listViewNews.setAdapter(newsAdapter);
 
         presenter.setView(this);
+    }
 
-        listViewNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final NewsArticle article = newsAdapter.getItem(position);
-                final Intent intent = NewsDetailActivity.createIntent(MainActivity.this,article);
-                startActivity(intent);
-            }
-        });
+    @OnItemClick(R.id.listViewNews)
+    public void onItemClick(int position) {
+        final NewsArticle article = newsAdapter.getItem(position);
+        final Intent intent = NewsDetailActivity.createIntent(MainActivity.this,article);
+        startActivity(intent);
     }
 
     @Override

@@ -19,13 +19,13 @@ public final class NewsDetailActivity extends AppCompatActivity {
 
     private static final String NEWS_DETAIL = "NEWS DETAIL";
 
-    public NewsArticle article;
+    private NewsArticle article;
 
     @BindView(R.id.webViewNews)
     protected WebView webWiewNews;
 
     public static Intent createIntent(final Context context, final NewsArticle article) {
-        Intent intent = new Intent(context, NewsDetailActivity.class);
+        final Intent intent = new Intent(context, NewsDetailActivity.class);
         NewsArticleParcelable articleParcelable = new NewsArticleParcelable(article);
         intent.putExtra(NEWS_DETAIL, articleParcelable);
         return intent;
