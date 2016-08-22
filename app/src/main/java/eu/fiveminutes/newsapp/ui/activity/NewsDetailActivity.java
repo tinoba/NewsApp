@@ -24,7 +24,7 @@ public final class NewsDetailActivity extends AppCompatActivity {
     protected WebView webviewNews;
 
     public static Intent createIntent(final Context context, final NewsArticle article) {
-        Intent intent = new Intent(context, NewsDetailActivity.class);
+        final Intent intent = new Intent(context, NewsDetailActivity.class);
         NewsArticleParcelable articleParcelable = new NewsArticleParcelable(article);
         intent.putExtra(NEWS_DETAIL, articleParcelable);
         return intent;

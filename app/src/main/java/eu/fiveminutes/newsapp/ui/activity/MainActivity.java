@@ -13,6 +13,7 @@ import android.widget.ListView;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnItemClick;
 import eu.fiveminutes.newsapp.application.ObjectGraph;
 import butterknife.ButterKnife;
 import eu.fiveminutes.news_app_2.R;
@@ -48,6 +49,13 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
             }
         });
     }
+
+    @OnItemClick(R.id.activity_main_news_list)
+        public void onItemClick(int position) {
+                final NewsArticle article = newsAdapter.getItem(position);
+                final Intent intent = NewsDetailActivity.createIntent(MainActivity.this,article);
+                startActivity(intent);
+            }
 
     private boolean isNetworkConnected() {
         final ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);

@@ -52,9 +52,6 @@ public final class ApiDocs {
     @SerializedName("subsection_name")
     public Object subsectionName;
 
-   /* @SerializedName("byline")
-    public ApiByline byline;*/
-
     @SerializedName("type_of_material")
     public String typeOfMaterial;
 
