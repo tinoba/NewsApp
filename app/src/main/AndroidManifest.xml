@@ -11,14 +11,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="eu.fiveminutes.newsapp.ui.MainActivity">
+        <activity android:name="eu.fiveminutes.newsapp.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="eu.fiveminutes.newsapp.ui.NewsDetailActivity"></activity>
+        <activity android:name="eu.fiveminutes.newsapp.ui.activity.NewsDetailActivity"></activity>
     </application>
 
 </manifest>

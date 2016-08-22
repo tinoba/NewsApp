@@ -2,8 +2,8 @@ package eu.fiveminutes.newsapp.api;
 
 import eu.fiveminutes.newsapp.api.converter.ApiConverter;
 import eu.fiveminutes.newsapp.api.converter.ApiConverterImpl;
-import eu.fiveminutes.newsapp.ui.NewsListPresenter;
-import eu.fiveminutes.newsapp.ui.NewsListPresenterImpl;
+import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
+import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenterImpl;
 
 
 public final class ObjectGraph {

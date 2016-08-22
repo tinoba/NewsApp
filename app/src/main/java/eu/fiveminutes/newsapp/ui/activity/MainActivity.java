@@ -1,11 +1,10 @@
-package eu.fiveminutes.newsapp.ui;
+package eu.fiveminutes.newsapp.ui.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.List;
@@ -13,17 +12,17 @@ import java.util.List;
 import butterknife.BindView;
 import eu.fiveminutes.newsapp.api.ObjectGraph;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import eu.fiveminutes.news_app_2.R;
 import eu.fiveminutes.newsapp.application.NewsApp;
 import eu.fiveminutes.newsapp.model.NewsArticle;
+import eu.fiveminutes.newsapp.ui.adapter.NewsListAdapter;
+import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
+import eu.fiveminutes.newsapp.ui.presenter.NewsListView;
 
 public final class MainActivity extends AppCompatActivity implements NewsListView {
 
     @BindView(R.id.listViewNews)
     protected ListView listViewNews;
-
-    private ObjectGraph objectGraph;
 
     private NewsListPresenter presenter;
     private NewsListAdapter newsAdapter;
@@ -33,12 +32,9 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        objectGraph = ((NewsApp) getApplication()).getObjectGraph();
+        final ObjectGraph objectGraph = ((NewsApp) getApplication()).getObjectGraph();
         presenter = objectGraph.createNewsListPresenter();
-        newsAdapter = new NewsListAdapter(this);
-        listViewNews.setAdapter(newsAdapter);
-
-        presenter.setView(this);
+        setNewsListAdapter();
 
         listViewNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -50,9 +46,15 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
         });
     }
 
+    public void setNewsListAdapter(){
+        newsAdapter = new NewsListAdapter(this);
+        listViewNews.setAdapter(newsAdapter);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
+        presenter.setView(this);
         presenter.loadNews();
     }
 

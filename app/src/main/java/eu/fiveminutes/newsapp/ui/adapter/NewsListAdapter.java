@@ -1,4 +1,4 @@
-package eu.fiveminutes.newsapp.ui;
+package eu.fiveminutes.newsapp.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
