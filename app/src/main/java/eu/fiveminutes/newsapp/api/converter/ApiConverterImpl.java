@@ -15,7 +15,7 @@ public final class ApiConverterImpl implements ApiConverter {
     public List<NewsArticle> convertToNewsArticles(List<ApiDocs> apiDocs) {
         final List<NewsArticle> articles = new ArrayList<>(apiDocs.size());
         for (ApiDocs docs : apiDocs) {
-            articles.add(new NewsArticle(docs.headline.mainHeadline,docs.webUrl, docs.snippet));
+            articles.add(new NewsArticle(docs.headline.mainHeadline,docs.snippet, docs.webUrl));
         }
 
         return articles;

@@ -6,6 +6,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -63,7 +64,7 @@ public final class NewsDetailActivity extends AppCompatActivity {
         }
 
         public NewsArticle toMewsArticle() {
-            return new NewsArticle(webUrl, snippet, mainHeadline);
+            return new NewsArticle(mainHeadline, snippet, webUrl);
         }
 
         @Override
