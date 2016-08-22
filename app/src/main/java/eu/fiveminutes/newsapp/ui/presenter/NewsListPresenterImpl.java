@@ -60,7 +60,6 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
         view.renderView(articleRepository.getAllNews());
     }
 
-
     public void addNewTask(final List<NewsArticle> articles) {
         final NewsListView view = newsListViewWeakReference.get();
         if (view != null) {

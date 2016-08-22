@@ -11,15 +11,11 @@ public final class DatabaseHelper extends SQLiteOpenHelper{
     }
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        final String CREATE_TASKS_TABLE = "CREATE TABLE " + DatabaseContract.TABLE_ARTICLES + "("
-                + DatabaseContract.KEY_ID + " INTEGER PRIMARY KEY, " + DatabaseContract.KEY_HEADLINE + " TEXT, "
-                + DatabaseContract.KEY_SNIPPET + " TEXT, " + DatabaseContract.KEY_WEB_URL + " TEXT)";
-        sqLiteDatabase.execSQL(CREATE_TASKS_TABLE);
+        sqLiteDatabase.execSQL(DatabaseContract.NewsArticleTable.CREATE_ARTICLES_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.TABLE_ARTICLES);
-        onCreate(sqLiteDatabase);
+
     }
 }

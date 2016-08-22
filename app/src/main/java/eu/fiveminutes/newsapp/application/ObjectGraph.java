@@ -10,6 +10,8 @@ import eu.fiveminutes.newsapp.business.dao.ArticleRepositoryImpl;
 import eu.fiveminutes.newsapp.business.dao.DatabaseHelper;
 import eu.fiveminutes.newsapp.business.dao.NewsDao;
 import eu.fiveminutes.newsapp.business.dao.NewsDaoImpl;
+import eu.fiveminutes.newsapp.ui.presenter.NetworkInformation;
+import eu.fiveminutes.newsapp.ui.presenter.NetworkInformationImpl;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenterImpl;
 
@@ -20,9 +22,17 @@ public final class ObjectGraph {
     private NetworkService networkService;
     private ArticleRepository articleRepository;
     private Application application;
+    private NetworkInformation networkInformation;
 
     public ObjectGraph(Application application){
         this.application=application;
+    }
+
+    public NetworkInformation getNetworkInformation(){
+        if (networkInformation == null){
+            networkInformation = new NetworkInformationImpl();
+        }
+        return networkInformation;
     }
 
     public ArticleRepository getArticleRepository(){

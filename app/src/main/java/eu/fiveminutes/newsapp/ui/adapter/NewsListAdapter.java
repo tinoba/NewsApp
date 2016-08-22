@@ -44,6 +44,7 @@ public final class NewsListAdapter extends ArrayAdapter<NewsArticle> {
 
         final NewsArticle article = getItem(position);
         holder.txtHeadLine.setText(article.mainHeadline);
+
         return view;
     }
 

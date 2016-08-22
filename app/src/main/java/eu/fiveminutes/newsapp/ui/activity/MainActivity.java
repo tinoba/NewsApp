@@ -22,6 +22,7 @@ import eu.fiveminutes.news_app_2.R;
 import eu.fiveminutes.newsapp.application.NewsApp;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 import eu.fiveminutes.newsapp.ui.adapter.NewsListAdapter;
+import eu.fiveminutes.newsapp.ui.presenter.NetworkInformation;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListView;
 
@@ -32,6 +33,7 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
 
     private NewsListPresenter presenter;
     private NewsListAdapter newsAdapter;
+    private NetworkInformation networkInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,22 +42,18 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
         ButterKnife.bind(this);
         final ObjectGraph objectGraph = ((NewsApp) getApplication()).getObjectGraph();
         presenter = objectGraph.createNewsListPresenter();
+        networkInformation = objectGraph.getNetworkInformation();
         setNewsListAdapter();
     }
 
     @OnItemClick(R.id.activity_main_news_list)
-        public void onItemClick(int position) {
-                final NewsArticle article = newsAdapter.getItem(position);
-                final Intent intent = NewsDetailActivity.createIntent(MainActivity.this,article);
-                startActivity(intent);
-            }
-
-    private boolean isNetworkConnected() {
-        final ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null;
+    public void onItemClick(int position) {
+        final NewsArticle article = newsAdapter.getItem(position);
+        final Intent intent = NewsDetailActivity.createIntent(MainActivity.this, article);
+        startActivity(intent);
     }
 
-    public void setNewsListAdapter(){
+    public void setNewsListAdapter() {
         newsAdapter = new NewsListAdapter(this);
         activity_main_news_list.setAdapter(newsAdapter);
     }
@@ -64,10 +62,9 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
     protected void onResume() {
         super.onResume();
         presenter.setView(this);
-        if(isNetworkConnected()) {
+        if (networkInformation.isConnected(MainActivity.this)) {
             presenter.loadNews();
-        }
-        else{
+        } else {
             presenter.loadNewsDao();
         }
     }

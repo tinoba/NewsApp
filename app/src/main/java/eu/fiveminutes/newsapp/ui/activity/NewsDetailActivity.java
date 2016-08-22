@@ -17,7 +17,7 @@ import eu.fiveminutes.newsapp.model.NewsArticle;
 
 public final class NewsDetailActivity extends AppCompatActivity {
 
-    private static final String NEWS_DETAIL = "NEWS DETAIL";
+    private static final String NEWS_DETAIL = "NEWS_DETAIL";
 
     private NewsArticle article;
 
