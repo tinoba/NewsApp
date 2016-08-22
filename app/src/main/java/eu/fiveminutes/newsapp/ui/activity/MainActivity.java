@@ -39,15 +39,6 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
         final ObjectGraph objectGraph = ((NewsApp) getApplication()).getObjectGraph();
         presenter = objectGraph.createNewsListPresenter();
         setNewsListAdapter();
-
-        activity_main_news_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final NewsArticle article = newsAdapter.getItem(position);
-                final Intent intent = NewsDetailActivity.createIntent(MainActivity.this,article);
-                startActivity(intent);
-            }
-        });
     }
 
     @OnItemClick(R.id.activity_main_news_list)
