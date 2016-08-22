@@ -1,8 +1,5 @@
 package eu.fiveminutes.newsapp.model;
 
-/**
- * Created by tinoba on 18.8.2016..
- */
 public final class NewsArticle {
 
     public final String webUrl;
