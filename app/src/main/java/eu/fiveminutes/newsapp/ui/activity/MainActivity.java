@@ -2,12 +2,12 @@ package eu.fiveminutes.newsapp.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.List;
@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.OnItemClick;
 import eu.fiveminutes.newsapp.application.ObjectGraph;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import eu.fiveminutes.news_app_2.R;
 import eu.fiveminutes.newsapp.application.NewsApp;
 import eu.fiveminutes.newsapp.model.NewsArticle;
