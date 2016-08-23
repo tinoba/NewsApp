@@ -1,5 +1,7 @@
 package eu.fiveminutes.newsapp.business.dao;
 
+import android.util.Log;
+
 import java.util.List;
 
 import eu.fiveminutes.newsapp.model.NewsArticle;
