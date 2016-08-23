@@ -37,7 +37,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
         newsListViewWeakReference = new WeakReference<>(view);
     }
 
-    private void getDataFromApi(){
+    private void getDataFromApi() {
         Call<ApiNews> call = service.getAPI().getNews();
         call.enqueue(new Callback<ApiNews>() {
             @Override
@@ -45,7 +45,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
                 final NewsListView view = newsListViewWeakReference.get();
                 if (view != null) {
                     final List<NewsArticle> articles = apiConverter.convertToNewsArticles(response.body().response.docs);
-                    view.renderView(articles);
+                    view.renderView(new NewsListViewModel(false, articles));
                     addNewTask(articles);
                 }
             }
@@ -56,14 +56,16 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
         });
     }
 
-    private void getDataFromDatabase(){
+    private void getDataFromDatabase() {
         final NewsListView view = newsListViewWeakReference.get();
-        view.renderView(articleRepository.getAllNews());
+        if (view!= null) {
+            view.renderView(new NewsListViewModel(false,articleRepository.getAllNews()));
+        }
     }
 
     @Override
     public void loadNews() {
-        if (networkInformation.isConnected()){
+        if (networkInformation.isConnected()) {
             getDataFromApi();
         } else {
             getDataFromDatabase();
@@ -80,12 +82,12 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
                     protected Boolean doInBackground(Void... voids) {
                         try {
                             articleRepository.clearNewsTable();
-                            for (NewsArticle article:articles){
+                            for (NewsArticle article : articles) {
                                 articleRepository.insertNews(article);
                             }
                             return true;
                         } catch (Exception e) {
-                            Log.i("TAG",e.getMessage());
+                            Log.i("TAG", e.getMessage());
                             return false;
                         }
                     }
@@ -96,7 +98,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
                         if (view != null) {
 
                             if (result == true) {
-                                Log.i("TAG","News saved successfully");
+                                Log.i("TAG", "News saved successfully");
 
                             } else {
 
@@ -107,7 +109,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
                 };
                 asyncTask.execute();
             } else {
-                Log.i("TAG","Cannot add task without title!");
+                Log.i("TAG", "Cannot add task without title!");
             }
         }
 
