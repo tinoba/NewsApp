@@ -58,8 +58,8 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
 
     private void getDataFromDatabase() {
         final NewsListView view = newsListViewWeakReference.get();
-        if (view!= null) {
-            view.renderView(new NewsListViewModel(false,articleRepository.getAllNews()));
+        if (view != null) {
+            view.renderView(new NewsListViewModel(false, articleRepository.getAllNews()));
         }
     }
 

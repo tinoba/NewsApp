@@ -25,7 +25,7 @@ import eu.fiveminutes.newsapp.ui.presenter.NewsListView;
 public final class MainActivity extends AppCompatActivity implements NewsListView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.activity_main_news_list)
-    protected ListView activity_main_news_list;
+    protected ListView activityMainNewsList;
 
     @BindView(R.id.activity_main_news_swipe)
     protected SwipeRefreshLayout newsSwipe;
@@ -53,7 +53,7 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
 
     public void setNewsListAdapter() {
         newsAdapter = new NewsListAdapter(this);
-        activity_main_news_list.setAdapter(newsAdapter);
+        activityMainNewsList.setAdapter(newsAdapter);
     }
 
     @Override
@@ -66,7 +66,7 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
     public void showNews(final NewsListViewModel viewModel) {
         newsAdapter.clear();
         newsAdapter.addAll(viewModel.articles);
-        activity_main_news_list.deferNotifyDataSetChanged();
+        activityMainNewsList.deferNotifyDataSetChanged();
         newsSwipe.setRefreshing(viewModel.showRefreshing);
     }
 
