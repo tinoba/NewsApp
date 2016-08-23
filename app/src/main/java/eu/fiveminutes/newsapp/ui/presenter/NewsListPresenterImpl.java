@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -95,7 +96,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
                 final NewsListView view = newsListViewWeakReference.get();
                 if (view != null) {
                     if (articles.isEmpty()) {
-                        view.renderView(new NewsListViewModel(false, Collections.EMPTY_LIST, true));
+                        view.renderView(new NewsListViewModel(false, new ArrayList<NewsArticle>(), true));
                     } else {
                         view.renderView(new NewsListViewModel(false, articles, false));
                     }
@@ -134,7 +135,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
             final NewsListView view = newsListViewWeakReference.get();
             if (view != null) {
                 view.showErrorMessage(resourceUtils.getString(R.string.news_api_error_text));
-                view.renderView(new NewsListViewModel(false, Collections.EMPTY_LIST, false));
+                view.renderView(new NewsListViewModel(false, new ArrayList<NewsArticle>(), false));
             }
         }
 
