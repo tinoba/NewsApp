@@ -8,6 +8,7 @@ import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
 
+import eu.fiveminutes.news_app_2.R;
 import eu.fiveminutes.newsapp.api.ApiNews;
 import eu.fiveminutes.newsapp.api.NetworkService;
 import eu.fiveminutes.newsapp.api.converter.ApiConverter;
@@ -56,7 +57,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
             public void onFailure(Call<ApiNews> call, Throwable t) {
                 final NewsListView view = newsListViewWeakReference.get();
                 if (view != null) {
-                    view.showErrorMessage("News fetch failed");
+                    view.showErrorMessage(String.valueOf(R.string.news_api_error_text));
                 }
             }
         });

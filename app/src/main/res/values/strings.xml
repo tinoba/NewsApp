@@ -2,4 +2,6 @@
     <string name="app_name">news-app-2</string>
     <string name="download">Download</string>
     <string name="txtHeadline">Headline</string>
+    <string name="news_database_error_text">News fetch failed</string>
+    <string name="news_api_error_text">News fetch failed</string>
 </resources>

@@ -10,8 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="30sp"
-        android:layout_gravity="center" />
+        android:textSize="@dimen/activity_main_error_text_size" />
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/activity_main_news_swipe"
         android:layout_width="match_parent"

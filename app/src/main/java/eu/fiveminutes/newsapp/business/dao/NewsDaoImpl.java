@@ -1,14 +1,10 @@
 package eu.fiveminutes.newsapp.business.dao;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -62,7 +58,7 @@ public final class NewsDaoImpl implements NewsDao {
         return contentValues;
     }
 
-    private NewsArticle parseToArticle(final Cursor cursor){
+    private NewsArticle parseToArticle(final Cursor cursor) {
         return new NewsArticle(cursor.getString(cursor.getColumnIndex(DatabaseContract.NewsArticleTable.KEY_HEADLINE)),
                 cursor.getString(cursor.getColumnIndex(DatabaseContract.NewsArticleTable.KEY_SNIPPET)),
                 cursor.getString(cursor.getColumnIndex(DatabaseContract.NewsArticleTable.KEY_WEB_URL)));

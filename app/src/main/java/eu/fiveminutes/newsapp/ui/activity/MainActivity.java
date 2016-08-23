@@ -78,7 +78,7 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
     @Override
     public void renderView(final NewsListViewModel viewModel) {
         if (viewModel.showTextBox) {
-            errorMessage.setText("News fetch failed");
+            errorMessage.setText(String.valueOf(R.string.news_database_error_text));
             errorMessage.setVisibility(View.VISIBLE);
         } else {
             errorMessage.setVisibility(View.GONE);
@@ -88,7 +88,7 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
     }
 
     @Override
-    public void showErrorMessage(String message) {
+    public void showErrorMessage(final String message) {
         showToast(message);
     }
 
