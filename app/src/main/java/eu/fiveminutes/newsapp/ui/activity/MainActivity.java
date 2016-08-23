@@ -77,11 +77,10 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
 
     @Override
     public void renderView(final NewsListViewModel viewModel) {
+        errorMessage.setVisibility(viewModel.showTextBox ? View.VISIBLE : View.GONE);
         if (viewModel.showTextBox) {
             errorMessage.setText(String.valueOf(R.string.news_database_error_text));
-            errorMessage.setVisibility(View.VISIBLE);
         } else {
-            errorMessage.setVisibility(View.GONE);
             showNews(viewModel.articles);
         }
         newsSwipe.setRefreshing(viewModel.showRefreshing);
