@@ -1,8 +1,10 @@
 package eu.fiveminutes.newsapp.ui.activity;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import java.util.List;
@@ -15,14 +17,18 @@ import eu.fiveminutes.news_app_2.R;
 import eu.fiveminutes.newsapp.application.NewsApp;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 import eu.fiveminutes.newsapp.ui.adapter.NewsListAdapter;
+import eu.fiveminutes.newsapp.ui.presenter.NewsListViewModel;
 import eu.fiveminutes.newsapp.utils.NetworkInformation;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListView;
 
-public final class MainActivity extends AppCompatActivity implements NewsListView {
+public final class MainActivity extends AppCompatActivity implements NewsListView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.activity_main_news_list)
-    protected ListView activity_main_news_list;
+    protected ListView activityMainNewsList;
+
+    @BindView(R.id.activity_main_news_swipe)
+    protected SwipeRefreshLayout newsSwipe;
 
     private NewsListPresenter presenter;
     private NewsListAdapter newsAdapter;
@@ -34,6 +40,7 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
         ButterKnife.bind(this);
         final ObjectGraph objectGraph = ((NewsApp) getApplication()).getObjectGraph();
         presenter = objectGraph.createNewsListPresenter();
+        newsSwipe.setOnRefreshListener(this);
         setNewsListAdapter();
     }
 
@@ -46,7 +53,7 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
 
     public void setNewsListAdapter() {
         newsAdapter = new NewsListAdapter(this);
-        activity_main_news_list.setAdapter(newsAdapter);
+        activityMainNewsList.setAdapter(newsAdapter);
     }
 
     @Override
@@ -56,14 +63,19 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
         presenter.loadNews();
     }
 
-    public void showNews(List<NewsArticle> articles) {
+    public void showNews(final NewsListViewModel viewModel) {
         newsAdapter.clear();
-        newsAdapter.addAll(articles);
-        activity_main_news_list.deferNotifyDataSetChanged();
+        newsAdapter.addAll(viewModel.articles);
+        newsSwipe.setRefreshing(viewModel.showRefreshing);
     }
 
     @Override
-    public void renderView(List<NewsArticle> newsArticles) {
-        showNews(newsArticles);
+    public void renderView(final NewsListViewModel viewModel) {
+        showNews(viewModel);
+    }
+
+    @Override
+    public void onRefresh() {
+        presenter.loadNews();
     }
 }

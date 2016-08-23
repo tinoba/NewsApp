@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="eu.fiveminutes.newsapp.ui.activity.NewsDetailActivity"></activity>
+        <activity android:name="eu.fiveminutes.newsapp.ui.activity.NewsDetailActivity"/>
     </application>
 
 </manifest>
