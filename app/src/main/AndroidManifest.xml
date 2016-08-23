@@ -3,6 +3,8 @@
     package="eu.fiveminutes.news_app_2">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name="eu.fiveminutes.newsapp.application.NewsApp"
@@ -11,14 +13,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="eu.fiveminutes.newsapp.ui.MainActivity">
+        <activity android:name="eu.fiveminutes.newsapp.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="eu.fiveminutes.newsapp.ui.NewsDetailActivity"></activity>
+        <activity android:name="eu.fiveminutes.newsapp.ui.activity.NewsDetailActivity"></activity>
     </application>
 
 </manifest>

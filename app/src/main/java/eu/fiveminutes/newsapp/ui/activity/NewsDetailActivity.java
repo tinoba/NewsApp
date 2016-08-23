@@ -1,4 +1,4 @@
-package eu.fiveminutes.newsapp.ui;
+package eu.fiveminutes.newsapp.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,9 +6,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,12 +17,12 @@ import eu.fiveminutes.newsapp.model.NewsArticle;
 
 public final class NewsDetailActivity extends AppCompatActivity {
 
-    private static final String NEWS_DETAIL = "NEWS DETAIL";
+    private static final String NEWS_DETAIL = "NEWS_DETAIL";
 
     private NewsArticle article;
 
     @BindView(R.id.webViewNews)
-    protected WebView webWiewNews;
+    protected WebView webviewNews;
 
     public static Intent createIntent(final Context context, final NewsArticle article) {
         final Intent intent = new Intent(context, NewsDetailActivity.class);
@@ -40,14 +40,14 @@ public final class NewsDetailActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         final NewsArticleParcelable articleParcelable = intent.getExtras().getParcelable(NEWS_DETAIL);
         article = articleParcelable.toMewsArticle();
-        webWiewNews.setWebViewClient(new WebViewClient());
+        webviewNews.setWebViewClient(new WebViewClient());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        webWiewNews.loadUrl(article.webUrl);
+        webviewNews.loadUrl(article.webUrl);
         getSupportActionBar().setTitle(article.mainHeadline);
     }
 
@@ -64,7 +64,7 @@ public final class NewsDetailActivity extends AppCompatActivity {
         }
 
         public NewsArticle toMewsArticle() {
-            return new NewsArticle(webUrl, snippet, mainHeadline);
+            return new NewsArticle(mainHeadline, snippet, webUrl);
         }
 
         @Override

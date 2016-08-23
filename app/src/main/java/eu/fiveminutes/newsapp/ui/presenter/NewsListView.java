@@ -1,4 +1,4 @@
-package eu.fiveminutes.newsapp.ui;
+package eu.fiveminutes.newsapp.ui.presenter;
 
 import java.util.List;
 

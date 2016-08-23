@@ -1,30 +1,28 @@
-package eu.fiveminutes.newsapp.ui;
+package eu.fiveminutes.newsapp.ui.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnItemClick;
-import eu.fiveminutes.newsapp.api.ObjectGraph;
+import eu.fiveminutes.newsapp.application.ObjectGraph;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import eu.fiveminutes.news_app_2.R;
 import eu.fiveminutes.newsapp.application.NewsApp;
 import eu.fiveminutes.newsapp.model.NewsArticle;
+import eu.fiveminutes.newsapp.ui.adapter.NewsListAdapter;
+import eu.fiveminutes.newsapp.utils.NetworkInformation;
+import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
+import eu.fiveminutes.newsapp.ui.presenter.NewsListView;
 
 public final class MainActivity extends AppCompatActivity implements NewsListView {
 
-    @BindView(R.id.listViewNews)
-    protected ListView listViewNews;
-
-    private ObjectGraph objectGraph;
+    @BindView(R.id.activity_main_news_list)
+    protected ListView activity_main_news_list;
 
     private NewsListPresenter presenter;
     private NewsListAdapter newsAdapter;
@@ -34,31 +32,34 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        objectGraph = ((NewsApp) getApplication()).getObjectGraph();
+        final ObjectGraph objectGraph = ((NewsApp) getApplication()).getObjectGraph();
         presenter = objectGraph.createNewsListPresenter();
-        newsAdapter = new NewsListAdapter(this);
-        listViewNews.setAdapter(newsAdapter);
-
-        presenter.setView(this);
+        setNewsListAdapter();
     }
 
-    @OnItemClick(R.id.listViewNews)
+    @OnItemClick(R.id.activity_main_news_list)
     public void onItemClick(int position) {
         final NewsArticle article = newsAdapter.getItem(position);
-        final Intent intent = NewsDetailActivity.createIntent(MainActivity.this,article);
+        final Intent intent = NewsDetailActivity.createIntent(MainActivity.this, article);
         startActivity(intent);
+    }
+
+    public void setNewsListAdapter() {
+        newsAdapter = new NewsListAdapter(this);
+        activity_main_news_list.setAdapter(newsAdapter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        presenter.setView(this);
         presenter.loadNews();
     }
 
     public void showNews(List<NewsArticle> articles) {
         newsAdapter.clear();
         newsAdapter.addAll(articles);
-        listViewNews.deferNotifyDataSetChanged();
+        activity_main_news_list.deferNotifyDataSetChanged();
     }
 
     @Override

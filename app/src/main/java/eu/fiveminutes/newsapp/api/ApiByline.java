@@ -9,9 +9,6 @@ import java.util.List;
  */
 public final class ApiByline {
 
-    @SerializedName("contributor")
-    public String contributor;
-
     @SerializedName("person")
     public List<ApiPerson> person;
 

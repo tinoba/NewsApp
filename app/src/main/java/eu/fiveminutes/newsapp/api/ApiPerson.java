@@ -17,7 +17,7 @@ public final class ApiPerson {
     public String firstName;
 
     @SerializedName("rank")
-    public String rank;
+    public int rank;
 
     @SerializedName("lastname")
     public String lastName;

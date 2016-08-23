@@ -1,0 +1,23 @@
+package eu.fiveminutes.newsapp.business.dao;
+
+public final class DatabaseContract {
+
+    public static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "tasksManager";
+
+    public static final class NewsArticleTable {
+
+        public static final String TABLE_ARTICLES = "articles";
+
+        public static final String KEY_HEADLINE = "headline";
+        public static final String KEY_ID = "id";
+        public static final String KEY_SNIPPET = "snippet";
+        public static final String KEY_WEB_URL = "url";
+
+        public static final String CREATE_ARTICLES_TABLE = "CREATE TABLE " + TABLE_ARTICLES + "("
+                + NewsArticleTable.KEY_ID + " INTEGER PRIMARY KEY, " + NewsArticleTable.KEY_HEADLINE + " TEXT, "
+                + NewsArticleTable.KEY_SNIPPET + " TEXT, " + NewsArticleTable.KEY_WEB_URL + " TEXT)";
+
+        public static final String SELECT_ALL_ARTICLES = "SELECT * FROM " + DatabaseContract.NewsArticleTable.TABLE_ARTICLES;
+    }
+}

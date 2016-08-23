@@ -6,9 +6,9 @@ public final class NewsArticle {
     public final String snippet;
     public final String mainHeadline;
 
-    public NewsArticle(String webUrl, String snippet, String mainHeadline) {
-        this.webUrl = webUrl;
-        this.snippet = snippet;
+    public NewsArticle(String mainHeadline, String snippet, String webUrl) {
         this.mainHeadline = mainHeadline;
+        this.snippet = snippet;
+        this.webUrl = webUrl;
     }
 }
