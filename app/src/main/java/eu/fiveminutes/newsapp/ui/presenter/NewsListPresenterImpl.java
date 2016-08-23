@@ -2,10 +2,13 @@ package eu.fiveminutes.newsapp.ui.presenter;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
+import java.util.Collections;
 import java.util.List;
 
+import eu.fiveminutes.news_app_2.R;
 import eu.fiveminutes.newsapp.api.ApiNews;
 import eu.fiveminutes.newsapp.api.NetworkService;
 import eu.fiveminutes.newsapp.api.converter.ApiConverter;
@@ -45,14 +48,17 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
                 final NewsListView view = newsListViewWeakReference.get();
                 if (view != null) {
                     final List<NewsArticle> articles = apiConverter.convertToNewsArticles(response.body().response.docs);
-                    view.renderView(new NewsListViewModel(false, articles));
+                    view.renderView(new NewsListViewModel(false, articles, false));
                     addNewTask(articles);
                 }
             }
 
             @Override
             public void onFailure(Call<ApiNews> call, Throwable t) {
-
+                final NewsListView view = newsListViewWeakReference.get();
+                if (view != null) {
+                    view.showErrorMessage(String.valueOf(R.string.news_api_error_text));
+                }
             }
         });
     }
@@ -60,7 +66,11 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
     private void getDataFromDatabase() {
         final NewsListView view = newsListViewWeakReference.get();
         if (view != null) {
-            view.renderView(new NewsListViewModel(false, articleRepository.getAllNews()));
+            if (articleRepository.getAllNews().isEmpty()) {
+                view.renderView(new NewsListViewModel(false, Collections.EMPTY_LIST, true));
+            } else {
+                view.renderView(new NewsListViewModel(false, articleRepository.getAllNews(), false));
+            }
         }
     }
 
@@ -100,7 +110,6 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
                             Log.i("TAG", "News saved successfully");
 
                         } else {
-
                         }
                     }
                 }

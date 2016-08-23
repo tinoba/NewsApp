@@ -5,7 +5,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -29,6 +33,9 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
 
     @BindView(R.id.activity_main_news_swipe)
     protected SwipeRefreshLayout newsSwipe;
+
+    @BindView(R.id.activity_main_error_message)
+    protected TextView errorMessage;
 
     private NewsListPresenter presenter;
     private NewsListAdapter newsAdapter;
@@ -63,15 +70,31 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
         presenter.loadNews();
     }
 
-    public void showNews(final NewsListViewModel viewModel) {
+    public void showNews(final List<NewsArticle> articles) {
         newsAdapter.clear();
-        newsAdapter.addAll(viewModel.articles);
-        newsSwipe.setRefreshing(viewModel.showRefreshing);
+        newsAdapter.addAll(articles);
     }
 
     @Override
     public void renderView(final NewsListViewModel viewModel) {
-        showNews(viewModel);
+        errorMessage.setVisibility(viewModel.showTextBox ? View.VISIBLE : View.GONE);
+        if (viewModel.showTextBox) {
+            errorMessage.setText(String.valueOf(R.string.news_database_error_text));
+        } else {
+            showNews(viewModel.articles);
+        }
+        newsSwipe.setRefreshing(viewModel.showRefreshing);
+    }
+
+    @Override
+    public void showErrorMessage(final String message) {
+        showToast(message);
+    }
+
+    private void showToast(final String message) {
+        final Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
     @Override
