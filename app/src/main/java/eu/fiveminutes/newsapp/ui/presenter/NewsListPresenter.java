@@ -7,6 +7,6 @@ public interface NewsListPresenter {
 
     void loadNews();
 
-    void setView(final NewsListView view);
+    void setView(NewsListView view);
 
 }

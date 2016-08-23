@@ -52,6 +52,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
 
             @Override
             public void onFailure(Call<ApiNews> call, Throwable t) {
+
             }
         });
     }
@@ -75,42 +76,37 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
     public void addNewTask(final List<NewsArticle> articles) {
         final NewsListView view = newsListViewWeakReference.get();
         if (view != null) {
-            if (true) {
-                AsyncTask<Void, Void, Boolean> asyncTask = new AsyncTask<Void, Void, Boolean>() {
+            AsyncTask<Void, Void, Boolean> asyncTask = new AsyncTask<Void, Void, Boolean>() {
 
-                    @Override
-                    protected Boolean doInBackground(Void... voids) {
-                        try {
-                            articleRepository.clearNewsTable();
-                            for (NewsArticle article : articles) {
-                                articleRepository.insertNews(article);
-                            }
-                            return true;
-                        } catch (Exception e) {
-                            Log.i("TAG", e.getMessage());
-                            return false;
+                @Override
+                protected Boolean doInBackground(Void... voids) {
+                    try {
+                        articleRepository.clearNewsTable();
+                        for (NewsArticle article : articles) {
+                            articleRepository.insertNews(article);
+                        }
+                        return true;
+                    } catch (Exception e) {
+                        Log.i("TAG", e.getMessage());
+                        return false;
+                    }
+                }
+
+                @Override
+                protected void onPostExecute(Boolean result) {
+                    final NewsListView view = newsListViewWeakReference.get();
+                    if (view != null) {
+                        if (result == true) {
+                            Log.i("TAG", "News saved successfully");
+
+                        } else {
+
                         }
                     }
+                }
 
-                    @Override
-                    protected void onPostExecute(Boolean result) {
-                        final NewsListView view = newsListViewWeakReference.get();
-                        if (view != null) {
-
-                            if (result == true) {
-                                Log.i("TAG", "News saved successfully");
-
-                            } else {
-
-                            }
-                        }
-                    }
-
-                };
-                asyncTask.execute();
-            } else {
-                Log.i("TAG", "Cannot add task without title!");
-            }
+            };
+            asyncTask.execute();
         }
 
     }

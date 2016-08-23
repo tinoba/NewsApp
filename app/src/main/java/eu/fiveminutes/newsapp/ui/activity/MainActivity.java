@@ -66,7 +66,6 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
     public void showNews(final NewsListViewModel viewModel) {
         newsAdapter.clear();
         newsAdapter.addAll(viewModel.articles);
-        activityMainNewsList.deferNotifyDataSetChanged();
         newsSwipe.setRefreshing(viewModel.showRefreshing);
     }
 
