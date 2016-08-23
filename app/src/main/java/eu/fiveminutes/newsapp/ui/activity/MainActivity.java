@@ -28,7 +28,7 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
     protected ListView activity_main_news_list;
 
     @BindView(R.id.activity_main_news_swipe)
-    protected SwipeRefreshLayout activity_main_news_swipe;
+    protected SwipeRefreshLayout newsSwipe;
 
     private NewsListPresenter presenter;
     private NewsListAdapter newsAdapter;
@@ -40,7 +40,7 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
         ButterKnife.bind(this);
         final ObjectGraph objectGraph = ((NewsApp) getApplication()).getObjectGraph();
         presenter = objectGraph.createNewsListPresenter();
-        activity_main_news_swipe.setOnRefreshListener(this);
+        newsSwipe.setOnRefreshListener(this);
         setNewsListAdapter();
     }
 
@@ -63,15 +63,15 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
         presenter.loadNews();
     }
 
-    public void showNews(NewsListViewModel viewModel) {
+    public void showNews(final NewsListViewModel viewModel) {
         newsAdapter.clear();
         newsAdapter.addAll(viewModel.articles);
         activity_main_news_list.deferNotifyDataSetChanged();
-        activity_main_news_swipe.setRefreshing(viewModel.showRefreshing);
+        newsSwipe.setRefreshing(viewModel.showRefreshing);
     }
 
     @Override
-    public void renderView(NewsListViewModel viewModel) {
+    public void renderView(final NewsListViewModel viewModel) {
         showNews(viewModel);
     }
 
