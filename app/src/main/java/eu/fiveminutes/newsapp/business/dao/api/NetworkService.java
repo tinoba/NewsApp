@@ -1,11 +1,8 @@
-package eu.fiveminutes.newsapp.api;
+package eu.fiveminutes.newsapp.business.dao.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by tinoba on 18.8.2016..
- */
 public final class NetworkService {
 
     public static final String BASE_URL = "http://api.nytimes.com";

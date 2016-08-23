@@ -1,9 +1,6 @@
 package eu.fiveminutes.newsapp.utils;
 
-import android.content.Context;
 import android.net.ConnectivityManager;
-
-import eu.fiveminutes.newsapp.utils.NetworkInformation;
 
 public class NetworkInformationImpl implements NetworkInformation {
 

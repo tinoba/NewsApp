@@ -2,9 +2,6 @@ package eu.fiveminutes.newsapp.application;
 
 import android.app.Application;
 
-/**
- * Created by tinoba on 18.8.2016..
- */
 public final class NewsApp extends Application {
 
     private ObjectGraph objectGraph;

@@ -5,14 +5,13 @@ import android.util.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import eu.fiveminutes.news_app_2.R;
-import eu.fiveminutes.newsapp.api.data.ApiNews;
-import eu.fiveminutes.newsapp.api.NetworkService;
-import eu.fiveminutes.newsapp.api.converter.ApiConverter;
-import eu.fiveminutes.newsapp.business.dao.ArticleRepository;
+import eu.fiveminutes.newsapp.business.dao.api.NetworkService;
+import eu.fiveminutes.newsapp.business.dao.api.converter.ApiConverter;
+import eu.fiveminutes.newsapp.business.dao.api.models.ApiNews;
+import eu.fiveminutes.newsapp.model.ArticleRepository;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 import eu.fiveminutes.newsapp.utils.NetworkInformation;
 import eu.fiveminutes.newsapp.utils.ResourceUtils;

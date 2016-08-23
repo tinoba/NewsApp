@@ -1,4 +1,4 @@
-package eu.fiveminutes.newsapp.business.dao;
+package eu.fiveminutes.newsapp.model;
 
 import java.util.List;
 

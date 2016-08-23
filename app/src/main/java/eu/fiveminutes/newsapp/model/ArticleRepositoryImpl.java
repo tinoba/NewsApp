@@ -1,14 +1,14 @@
-package eu.fiveminutes.newsapp.business.dao;
+package eu.fiveminutes.newsapp.model;
 
 import java.util.List;
 
-import eu.fiveminutes.newsapp.model.NewsArticle;
+import eu.fiveminutes.newsapp.business.dao.NewsDao;
 
 public final class ArticleRepositoryImpl implements ArticleRepository {
 
     private final NewsDao newsDao;
 
-    public ArticleRepositoryImpl(final NewsDao newsDao){
+    public ArticleRepositoryImpl(final NewsDao newsDao) {
         this.newsDao = newsDao;
     }
 
