@@ -1,4 +1,4 @@
-package eu.fiveminutes.newsapp.api;
+package eu.fiveminutes.newsapp.api.data;
 
 import com.google.gson.annotations.SerializedName;
 

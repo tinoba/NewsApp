@@ -1,6 +1,7 @@
 package eu.fiveminutes.newsapp.application;
 
 import android.app.Application;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 
 import eu.fiveminutes.newsapp.api.NetworkService;
@@ -15,6 +16,8 @@ import eu.fiveminutes.newsapp.utils.NetworkInformation;
 import eu.fiveminutes.newsapp.utils.NetworkInformationImpl;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenterImpl;
+import eu.fiveminutes.newsapp.utils.ResourceUtils;
+import eu.fiveminutes.newsapp.utils.ResourceUtilsImpl;
 
 
 public final class ObjectGraph {
@@ -24,23 +27,31 @@ public final class ObjectGraph {
     private ArticleRepository articleRepository;
     private Application application;
     private NetworkInformation networkInformation;
+    private ResourceUtils resourceUtils;
 
-    public ObjectGraph(Application application){
-        this.application=application;
+    public ObjectGraph(Application application) {
+        this.application = application;
     }
 
-    public NetworkInformation getNetworkInformation(){
-        if (networkInformation == null){
+    public NetworkInformation getNetworkInformation() {
+        if (networkInformation == null) {
             networkInformation = new NetworkInformationImpl(getConnectivityManager());
         }
         return networkInformation;
+    }
+
+    public ResourceUtils getResourceUtils() {
+        if (resourceUtils == null) {
+            resourceUtils = new ResourceUtilsImpl(application.getResources());
+        }
+        return resourceUtils;
     }
 
     public ConnectivityManager getConnectivityManager() {
         return (ConnectivityManager) application.getSystemService(application.CONNECTIVITY_SERVICE);
     }
 
-    public ArticleRepository getArticleRepository(){
+    public ArticleRepository getArticleRepository() {
         if (articleRepository == null) {
             articleRepository = new ArticleRepositoryImpl(getNewsDao());
         }
@@ -69,6 +80,6 @@ public final class ObjectGraph {
     }
 
     public NewsListPresenter createNewsListPresenter() {
-        return new NewsListPresenterImpl(getApiConverter(), getNetworkService(),getArticleRepository(),getNetworkInformation());
+        return new NewsListPresenterImpl(getApiConverter(), getNetworkService(), getArticleRepository(), getNetworkInformation(), getResourceUtils());
     }
 }
