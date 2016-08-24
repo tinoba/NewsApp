@@ -1,5 +1,7 @@
 package eu.fiveminutes.newsapp.business.dao.api.models;
 
+import android.net.Uri;
+
 import com.google.gson.annotations.SerializedName;
 
 public final class ApiMultimedia {
@@ -8,7 +10,7 @@ public final class ApiMultimedia {
     public String width;
 
     @SerializedName("url")
-    public String url;
+    public Uri url;
 
     @SerializedName("height")
     public String height;

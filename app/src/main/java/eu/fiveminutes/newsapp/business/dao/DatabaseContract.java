@@ -1,5 +1,7 @@
 package eu.fiveminutes.newsapp.business.dao;
 
+import eu.fiveminutes.newsapp.model.NewsArticle;
+
 public final class DatabaseContract {
 
     public static final int DATABASE_VERSION = 1;
@@ -13,10 +15,11 @@ public final class DatabaseContract {
         public static final String KEY_ID = "id";
         public static final String KEY_SNIPPET = "snippet";
         public static final String KEY_WEB_URL = "url";
+        public static final String KEY_IMG_URL = "img_url";
 
         public static final String CREATE_ARTICLES_TABLE = "CREATE TABLE " + TABLE_ARTICLES + "("
                 + NewsArticleTable.KEY_ID + " INTEGER PRIMARY KEY, " + NewsArticleTable.KEY_HEADLINE + " TEXT, "
-                + NewsArticleTable.KEY_SNIPPET + " TEXT, " + NewsArticleTable.KEY_WEB_URL + " TEXT)";
+                + NewsArticleTable.KEY_SNIPPET + " TEXT, " + NewsArticleTable.KEY_WEB_URL + " TEXT, " + NewsArticleTable.KEY_IMG_URL + " TEXT)";
 
         public static final String SELECT_ALL_ARTICLES = "SELECT * FROM " + DatabaseContract.NewsArticleTable.TABLE_ARTICLES;
     }

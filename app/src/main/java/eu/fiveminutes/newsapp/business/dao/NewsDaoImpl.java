@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.fiveminutes.newsapp.business.dao.DatabaseContract.NewsArticleTable;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 
 public final class NewsDaoImpl implements NewsDao {
@@ -16,7 +17,7 @@ public final class NewsDaoImpl implements NewsDao {
     @Override
     public void deleteNews() {
         final SQLiteDatabase sqLiteDatabase = helper.getReadableDatabase();
-        sqLiteDatabase.delete(DatabaseContract.NewsArticleTable.TABLE_ARTICLES, null, null);
+        sqLiteDatabase.delete(NewsArticleTable.TABLE_ARTICLES, null, null);
         sqLiteDatabase.close();
     }
 
@@ -27,14 +28,14 @@ public final class NewsDaoImpl implements NewsDao {
     @Override
     public void insertArticle(final NewsArticle article) {
         final SQLiteDatabase sqLiteDatabase = helper.getWritableDatabase();
-        sqLiteDatabase.insert(DatabaseContract.NewsArticleTable.TABLE_ARTICLES, null, mapToArticle(article));
+        sqLiteDatabase.insert(NewsArticleTable.TABLE_ARTICLES, null, mapToArticle(article));
         sqLiteDatabase.close();
     }
 
     @Override
     public final List<NewsArticle> getAllArticles() {
         final SQLiteDatabase sqLiteDatabase = helper.getReadableDatabase();
-        final Cursor cursor = sqLiteDatabase.rawQuery(DatabaseContract.NewsArticleTable.SELECT_ALL_ARTICLES, null);
+        final Cursor cursor = sqLiteDatabase.rawQuery(NewsArticleTable.SELECT_ALL_ARTICLES, null);
         if (cursor.moveToFirst()) {
             final List<NewsArticle> repo = new ArrayList<>(cursor.getCount());
             do {
@@ -50,16 +51,17 @@ public final class NewsDaoImpl implements NewsDao {
 
     private ContentValues mapToArticle(final NewsArticle article) {
         final ContentValues contentValues = new ContentValues();
-        contentValues.put(DatabaseContract.NewsArticleTable.KEY_HEADLINE, article.mainHeadline);
-        contentValues.put(DatabaseContract.NewsArticleTable.KEY_SNIPPET, article.snippet);
-        contentValues.put(DatabaseContract.NewsArticleTable.KEY_WEB_URL, article.webUrl);
+        contentValues.put(NewsArticleTable.KEY_HEADLINE, article.mainHeadline);
+        contentValues.put(NewsArticleTable.KEY_SNIPPET, article.snippet);
+        contentValues.put(NewsArticleTable.KEY_WEB_URL, article.webUrl);
+        contentValues.put(NewsArticleTable.KEY_IMG_URL, article);
 
         return contentValues;
     }
 
     private NewsArticle parseToArticle(final Cursor cursor) {
-        return new NewsArticle(cursor.getString(cursor.getColumnIndex(DatabaseContract.NewsArticleTable.KEY_HEADLINE)),
-                               cursor.getString(cursor.getColumnIndex(DatabaseContract.NewsArticleTable.KEY_SNIPPET)),
-                               cursor.getString(cursor.getColumnIndex(DatabaseContract.NewsArticleTable.KEY_WEB_URL)));
+        return new NewsArticle(cursor.getString(cursor.getColumnIndex(NewsArticleTable.KEY_HEADLINE)),
+                               cursor.getString(cursor.getColumnIndex(NewsArticleTable.KEY_SNIPPET)),
+                               cursor.getString(cursor.getColumnIndex(NewsArticleTable.KEY_WEB_URL)));
     }
 }
