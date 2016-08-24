@@ -10,8 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.fiveminutes.news_app_2.R;

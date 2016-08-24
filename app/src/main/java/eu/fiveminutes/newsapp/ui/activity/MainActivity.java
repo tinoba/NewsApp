@@ -64,6 +64,7 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
     @Override
     protected void onResume() {
         super.onResume();
+        getSupportActionBar().setTitle(R.string.main_activity_name);
         presenter.setView(this);
         presenter.loadNews();
     }

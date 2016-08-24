@@ -44,6 +44,7 @@ public final class NewsListAdapter extends ArrayAdapter<NewsArticle> {
         holder.txtHeadLine.setText(article.mainHeadline);
         Picasso.with(context)
                .load(article.imgUri)
+               .resize(200, 200)
                .into(holder.newsListImage);
         holder.newsListSnippet.setText(article.snippet);
 
