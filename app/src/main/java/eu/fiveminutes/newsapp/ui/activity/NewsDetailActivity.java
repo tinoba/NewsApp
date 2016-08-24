@@ -85,6 +85,7 @@ public final class NewsDetailActivity extends AppCompatActivity {
         }
 
         public static final Parcelable.Creator<NewsArticleParcelable> CREATOR = new Parcelable.Creator<NewsArticleParcelable>() {
+
             @Override
             public NewsArticleParcelable createFromParcel(Parcel source) {
                 return new NewsArticleParcelable(source);

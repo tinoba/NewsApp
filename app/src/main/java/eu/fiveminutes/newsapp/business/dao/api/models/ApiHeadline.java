@@ -15,6 +15,4 @@ public final class ApiHeadline {
 
     @SerializedName("print_headline")
     public String printHeadline;
-
-
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import eu.fiveminutes.newsapp.business.dao.api.models.ApiDocs;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 
-
 public final class ApiConverterImpl implements ApiConverter {
 
     @Override

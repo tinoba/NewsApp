@@ -2,7 +2,6 @@ package eu.fiveminutes.newsapp.business.dao.api.models;
 
 import com.google.gson.annotations.SerializedName;
 
-
 public class ApiNews {
 
     @SerializedName("response")

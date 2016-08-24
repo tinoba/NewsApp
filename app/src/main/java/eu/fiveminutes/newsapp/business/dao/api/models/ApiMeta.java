@@ -2,7 +2,6 @@ package eu.fiveminutes.newsapp.business.dao.api.models;
 
 import com.google.gson.annotations.SerializedName;
 
-
 public final class ApiMeta {
 
     @SerializedName("hits")
@@ -13,5 +12,4 @@ public final class ApiMeta {
 
     @SerializedName("offset")
     public String offset;
-
 }

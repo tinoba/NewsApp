@@ -2,7 +2,6 @@ package eu.fiveminutes.newsapp.business.dao.api.models;
 
 import com.google.gson.annotations.SerializedName;
 
-
 public final class ApiPerson {
 
     @SerializedName("organization")
@@ -19,5 +18,4 @@ public final class ApiPerson {
 
     @SerializedName("lastname")
     public String lastName;
-
 }

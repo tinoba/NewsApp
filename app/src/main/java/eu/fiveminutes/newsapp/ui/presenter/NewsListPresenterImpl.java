@@ -27,7 +27,6 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
     private final NetworkInformation networkInformation;
     private final ResourceUtils resourceUtils;
 
-
     private WeakReference<NewsListView> newsListViewWeakReference;
 
     public NewsListPresenterImpl(final ApiConverter apiConverter, final NetworkService service,
@@ -139,7 +138,6 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
                 view.renderView(new NewsListViewModel(false, new ArrayList<NewsArticle>(), false));
             }
         }
-
     }
 
     private static final class SaveArticlesTask extends AsyncTask<List<NewsArticle>, Void, Boolean> {

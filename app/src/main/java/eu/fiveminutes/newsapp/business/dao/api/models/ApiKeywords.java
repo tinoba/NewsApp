@@ -2,7 +2,6 @@ package eu.fiveminutes.newsapp.business.dao.api.models;
 
 import com.google.gson.annotations.SerializedName;
 
-
 public final class ApiKeywords {
 
     @SerializedName("rank")
@@ -16,5 +15,4 @@ public final class ApiKeywords {
 
     @SerializedName("value")
     public String value;
-
 }

@@ -1,10 +1,8 @@
 package eu.fiveminutes.newsapp.business.dao.api;
 
-
 import eu.fiveminutes.newsapp.business.dao.api.models.ApiNews;
 import retrofit2.Call;
 import retrofit2.http.GET;
-
 
 public interface NetworkAPI {
 

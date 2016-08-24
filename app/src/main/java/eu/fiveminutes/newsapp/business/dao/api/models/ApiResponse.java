@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-
 public final class ApiResponse {
 
     @SerializedName("docs")
@@ -12,5 +11,4 @@ public final class ApiResponse {
 
     @SerializedName("meta")
     public ApiMeta meta;
-
 }

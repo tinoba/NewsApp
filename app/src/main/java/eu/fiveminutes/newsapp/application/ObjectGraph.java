@@ -18,7 +18,6 @@ import eu.fiveminutes.newsapp.utils.NetworkInformationImpl;
 import eu.fiveminutes.newsapp.utils.ResourceUtils;
 import eu.fiveminutes.newsapp.utils.ResourceUtilsImpl;
 
-
 public final class ObjectGraph {
 
     private ApiConverter apiConverter;
