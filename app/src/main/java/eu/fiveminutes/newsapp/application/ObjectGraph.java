@@ -1,24 +1,22 @@
 package eu.fiveminutes.newsapp.application;
 
 import android.app.Application;
-import android.content.res.Resources;
 import android.net.ConnectivityManager;
 
-import eu.fiveminutes.newsapp.api.NetworkService;
-import eu.fiveminutes.newsapp.api.converter.ApiConverter;
-import eu.fiveminutes.newsapp.api.converter.ApiConverterImpl;
-import eu.fiveminutes.newsapp.business.dao.ArticleRepository;
-import eu.fiveminutes.newsapp.business.dao.ArticleRepositoryImpl;
+import eu.fiveminutes.newsapp.business.dao.api.NetworkService;
+import eu.fiveminutes.newsapp.business.dao.api.converter.ApiConverter;
+import eu.fiveminutes.newsapp.business.dao.api.converter.ApiConverterImpl;
+import eu.fiveminutes.newsapp.model.ArticleRepository;
+import eu.fiveminutes.newsapp.model.ArticleRepositoryImpl;
 import eu.fiveminutes.newsapp.business.dao.DatabaseHelper;
 import eu.fiveminutes.newsapp.business.dao.NewsDao;
 import eu.fiveminutes.newsapp.business.dao.NewsDaoImpl;
-import eu.fiveminutes.newsapp.utils.NetworkInformation;
-import eu.fiveminutes.newsapp.utils.NetworkInformationImpl;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenterImpl;
+import eu.fiveminutes.newsapp.utils.NetworkInformation;
+import eu.fiveminutes.newsapp.utils.NetworkInformationImpl;
 import eu.fiveminutes.newsapp.utils.ResourceUtils;
 import eu.fiveminutes.newsapp.utils.ResourceUtilsImpl;
-
 
 public final class ObjectGraph {
 

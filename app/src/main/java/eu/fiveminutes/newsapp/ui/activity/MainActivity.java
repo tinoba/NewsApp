@@ -1,10 +1,9 @@
 package eu.fiveminutes.newsapp.ui.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ListView;
@@ -14,17 +13,16 @@ import android.widget.Toast;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnItemClick;
-import eu.fiveminutes.newsapp.application.ObjectGraph;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 import eu.fiveminutes.news_app_2.R;
 import eu.fiveminutes.newsapp.application.NewsApp;
+import eu.fiveminutes.newsapp.application.ObjectGraph;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 import eu.fiveminutes.newsapp.ui.adapter.NewsListAdapter;
-import eu.fiveminutes.newsapp.ui.presenter.NewsListViewModel;
-import eu.fiveminutes.newsapp.utils.NetworkInformation;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListView;
+import eu.fiveminutes.newsapp.ui.presenter.NewsListViewModel;
 
 public final class MainActivity extends AppCompatActivity implements NewsListView, SwipeRefreshLayout.OnRefreshListener {
 

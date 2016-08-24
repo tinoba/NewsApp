@@ -1,12 +1,9 @@
-package eu.fiveminutes.newsapp.api.data;
+package eu.fiveminutes.newsapp.business.dao.api.models;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by tinoba on 17.8.2016..
- */
 public final class ApiResponse {
 
     @SerializedName("docs")
@@ -14,6 +11,4 @@ public final class ApiResponse {
 
     @SerializedName("meta")
     public ApiMeta meta;
-
-
 }

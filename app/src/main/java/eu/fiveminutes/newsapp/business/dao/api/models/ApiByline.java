@@ -1,12 +1,9 @@
-package eu.fiveminutes.newsapp.api.data;
+package eu.fiveminutes.newsapp.business.dao.api.models;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by tinoba on 18.8.2016..
- */
 public final class ApiByline {
 
     @SerializedName("person")

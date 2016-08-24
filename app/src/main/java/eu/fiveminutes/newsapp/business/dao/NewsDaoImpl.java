@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import eu.fiveminutes.newsapp.model.NewsArticle;
@@ -60,7 +59,7 @@ public final class NewsDaoImpl implements NewsDao {
 
     private NewsArticle parseToArticle(final Cursor cursor) {
         return new NewsArticle(cursor.getString(cursor.getColumnIndex(DatabaseContract.NewsArticleTable.KEY_HEADLINE)),
-                cursor.getString(cursor.getColumnIndex(DatabaseContract.NewsArticleTable.KEY_SNIPPET)),
-                cursor.getString(cursor.getColumnIndex(DatabaseContract.NewsArticleTable.KEY_WEB_URL)));
+                               cursor.getString(cursor.getColumnIndex(DatabaseContract.NewsArticleTable.KEY_SNIPPET)),
+                               cursor.getString(cursor.getColumnIndex(DatabaseContract.NewsArticleTable.KEY_WEB_URL)));
     }
 }

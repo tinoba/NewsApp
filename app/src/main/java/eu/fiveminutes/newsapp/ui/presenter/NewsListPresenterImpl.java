@@ -5,14 +5,13 @@ import android.util.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import eu.fiveminutes.news_app_2.R;
-import eu.fiveminutes.newsapp.api.data.ApiNews;
-import eu.fiveminutes.newsapp.api.NetworkService;
-import eu.fiveminutes.newsapp.api.converter.ApiConverter;
-import eu.fiveminutes.newsapp.business.dao.ArticleRepository;
+import eu.fiveminutes.newsapp.business.dao.api.NetworkService;
+import eu.fiveminutes.newsapp.business.dao.api.converter.ApiConverter;
+import eu.fiveminutes.newsapp.business.dao.api.models.ApiNews;
+import eu.fiveminutes.newsapp.model.ArticleRepository;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 import eu.fiveminutes.newsapp.utils.NetworkInformation;
 import eu.fiveminutes.newsapp.utils.ResourceUtils;
@@ -27,7 +26,6 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
     private final ArticleRepository articleRepository;
     private final NetworkInformation networkInformation;
     private final ResourceUtils resourceUtils;
-
 
     private WeakReference<NewsListView> newsListViewWeakReference;
 
@@ -69,6 +67,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
     }
 
     private static final class GetArticlesTask extends AsyncTask<Void, Void, Boolean> {
+
         private final ArticleRepository articleRepository;
         private final WeakReference<NewsListView> newsListViewWeakReference;
 
@@ -106,6 +105,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
     }
 
     private static final class GetNewsCallbackImpl implements Callback<ApiNews> {
+
         private final ApiConverter apiConverter;
         private final WeakReference<NewsListView> newsListViewWeakReference;
         private final ResourceUtils resourceUtils;
@@ -138,7 +138,6 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
                 view.renderView(new NewsListViewModel(false, new ArrayList<NewsArticle>(), false));
             }
         }
-
     }
 
     private static final class SaveArticlesTask extends AsyncTask<List<NewsArticle>, Void, Boolean> {
