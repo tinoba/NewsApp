@@ -1,6 +1,7 @@
 package eu.fiveminutes.newsapp.business.dao.api.converter;
 
 import android.net.Uri;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +16,11 @@ public final class ApiConverterImpl implements ApiConverter {
     public List<NewsArticle> convertToNewsArticles(final List<ApiDocs> apiDocs) {
         final List<NewsArticle> articles = new ArrayList<>(apiDocs.size());
         for (ApiDocs docs : apiDocs) {
-            if (docs.multimedia.isEmpty()){
+            if (docs.multimedia.isEmpty()) {
                 articles.add(new NewsArticle(docs.headline.mainHeadline, docs.snippet, docs.webUrl, Uri.EMPTY));
-            }else{
-                articles.add(new NewsArticle(docs.headline.mainHeadline, docs.snippet, docs.webUrl,docs.multimedia.get(0).url));
+            } else {
+                final Uri uri = Uri.parse(ApiEndpoint.NEWS_API_ENDPOINT.concat(docs.multimedia.get(0).url));
+                articles.add(new NewsArticle(docs.headline.mainHeadline, docs.snippet, docs.webUrl, uri));
             }
         }
 

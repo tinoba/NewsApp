@@ -1,5 +1,7 @@
 package eu.fiveminutes.newsapp.business.dao;
 
+import android.net.Uri;
+
 import eu.fiveminutes.newsapp.model.NewsArticle;
 
 public final class DatabaseContract {

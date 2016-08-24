@@ -10,7 +10,7 @@ public final class ApiMultimedia {
     public String width;
 
     @SerializedName("url")
-    public Uri url;
+    public String url;
 
     @SerializedName("height")
     public String height;
