@@ -13,5 +13,4 @@ public final class ApiResponse {
     @SerializedName("meta")
     public ApiMeta meta;
 
-
 }

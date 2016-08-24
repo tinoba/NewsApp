@@ -10,7 +10,7 @@ import eu.fiveminutes.newsapp.model.NewsArticle;
 public final class ApiConverterImpl implements ApiConverter {
 
     @Override
-    public List<NewsArticle> convertToNewsArticles(List<ApiDocs> apiDocs) {
+    public List<NewsArticle> convertToNewsArticles(final List<ApiDocs> apiDocs) {
         final List<NewsArticle> articles = new ArrayList<>(apiDocs.size());
         for (ApiDocs docs : apiDocs) {
             articles.add(new NewsArticle(docs.headline.mainHeadline, docs.snippet, docs.webUrl));
