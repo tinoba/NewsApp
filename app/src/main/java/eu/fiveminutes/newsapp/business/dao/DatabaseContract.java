@@ -6,7 +6,7 @@ import eu.fiveminutes.newsapp.model.NewsArticle;
 
 public final class DatabaseContract {
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "tasksManager";
 
     public static final class NewsArticleTable {
