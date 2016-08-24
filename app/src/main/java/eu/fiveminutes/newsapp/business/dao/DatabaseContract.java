@@ -24,5 +24,7 @@ public final class DatabaseContract {
                 + NewsArticleTable.KEY_SNIPPET + " TEXT, " + NewsArticleTable.KEY_WEB_URL + " TEXT, " + NewsArticleTable.KEY_IMG_URL + " TEXT)";
 
         public static final String SELECT_ALL_ARTICLES = "SELECT * FROM " + DatabaseContract.NewsArticleTable.TABLE_ARTICLES;
+
+        public static final String DROP_ARTICLES_TABLE = "DROP TABLE IF EXISTS "+ TABLE_ARTICLES;
     }
 }

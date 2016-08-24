@@ -17,7 +17,7 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+DatabaseContract.NewsArticleTable.TABLE_ARTICLES);
+        sqLiteDatabase.execSQL(DatabaseContract.NewsArticleTable.DROP_ARTICLES_TABLE);
         sqLiteDatabase.execSQL(DatabaseContract.NewsArticleTable.CREATE_ARTICLES_TABLE);
     }
 }
