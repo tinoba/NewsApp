@@ -1,7 +1,5 @@
 package eu.fiveminutes.newsapp.business.dao.api.models;
 
-import android.net.Uri;
-
 import com.google.gson.annotations.SerializedName;
 
 public final class ApiMultimedia {

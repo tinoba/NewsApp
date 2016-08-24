@@ -19,6 +19,8 @@ import eu.fiveminutes.newsapp.model.NewsArticle;
 
 public final class NewsListAdapter extends ArrayAdapter<NewsArticle> {
 
+    public static final int NEWS_LIST_IMAGE_SIZE = 200;
+
     private final LayoutInflater inflater;
     private final Context context;
 
@@ -44,7 +46,7 @@ public final class NewsListAdapter extends ArrayAdapter<NewsArticle> {
         holder.txtHeadLine.setText(article.mainHeadline);
         Picasso.with(context)
                .load(article.imgUri)
-               .resize(200, 200)
+               .resize(NEWS_LIST_IMAGE_SIZE, NEWS_LIST_IMAGE_SIZE)
                .into(holder.newsListImage);
         holder.newsListSnippet.setText(article.snippet);
 
