@@ -79,7 +79,7 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
     public void renderView(final NewsListViewModel viewModel) {
         errorMessage.setVisibility(viewModel.showTextBox ? View.VISIBLE : View.GONE);
         if (viewModel.showTextBox) {
-            errorMessage.setText(String.valueOf(R.string.news_database_error_text));
+            errorMessage.setText(getString(R.string.news_database_error_text));
         } else {
             showNews(viewModel.articles);
         }

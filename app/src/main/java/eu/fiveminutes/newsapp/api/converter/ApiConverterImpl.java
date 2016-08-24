@@ -3,7 +3,7 @@ package eu.fiveminutes.newsapp.api.converter;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.fiveminutes.newsapp.api.ApiDocs;
+import eu.fiveminutes.newsapp.api.data.ApiDocs;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 
 /**

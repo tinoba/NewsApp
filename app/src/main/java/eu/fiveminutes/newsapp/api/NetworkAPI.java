@@ -2,6 +2,7 @@ package eu.fiveminutes.newsapp.api;
 
 
 
+import eu.fiveminutes.newsapp.api.data.ApiNews;
 import retrofit2.Call;
 import retrofit2.http.GET;
 

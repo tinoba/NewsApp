@@ -45,7 +45,7 @@ public final class NewsDaoImpl implements NewsDao {
             return repo;
         } else {
             sqLiteDatabase.close();
-            return Collections.EMPTY_LIST;
+            return new ArrayList<>();
         }
     }
 
