@@ -2,43 +2,47 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:weightSum="1"
-    >
+                android:layout_marginBottom="@dimen/nest_item_list_top_bottom_margin"
+                android:layout_marginLeft="@dimen/news_item_list_left_right_margin"
+                android:layout_marginRight="@dimen/news_item_list_left_right_margin"
+                android:layout_marginTop="@dimen/nest_item_list_top_bottom_margin"
+                android:background="@drawable/news_list_item_shape"
+                android:weightSum="1">
 
     <ImageView
         android:id="@+id/activity_main_news_list_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="0.08"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_marginLeft="@dimen/news_item_list_views_margin"
+        android:layout_marginTop="@dimen/news_item_list_views_margin"
+        android:contentDescription="@string/news_image"/>
 
     <TextView
         android:id="@+id/txtHeadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_alignBottom="@+id/activity_main_news_list_image"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/news_item_list_views_margin"
+        android:layout_marginTop="@dimen/news_item_list_views_margin"
+        android:layout_toEndOf="@+id/activity_main_news_list_image"
         android:gravity="center"
         android:text="@string/txtHeadline"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/activity_main_news_list_image"
-        android:layout_alignParentTop="true"
-        android:layout_alignBottom="@+id/activity_main_news_list_image"/>
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     <TextView
+        android:id="@+id/activity_main_news_list_snippet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/activity_main_news_list_snippet"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/txtHeadline"
+        android:layout_margin="@dimen/news_item_list_views_margin"
         android:layout_toEndOf="@+id/activity_main_news_list_image"
-        android:layout_alignParentStart="true"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
 </RelativeLayout>

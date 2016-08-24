@@ -1,9 +1,5 @@
 package eu.fiveminutes.newsapp.business.dao;
 
-import android.net.Uri;
-
-import eu.fiveminutes.newsapp.model.NewsArticle;
-
 public final class DatabaseContract {
 
     public static final int DATABASE_VERSION = 2;
@@ -25,6 +21,6 @@ public final class DatabaseContract {
 
         public static final String SELECT_ALL_ARTICLES = "SELECT * FROM " + DatabaseContract.NewsArticleTable.TABLE_ARTICLES;
 
-        public static final String DROP_ARTICLES_TABLE = "DROP TABLE IF EXISTS "+ TABLE_ARTICLES;
+        public static final String DROP_ARTICLES_TABLE = "DROP TABLE IF EXISTS " + TABLE_ARTICLES;
     }
 }

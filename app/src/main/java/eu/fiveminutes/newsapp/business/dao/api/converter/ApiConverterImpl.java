@@ -1,13 +1,11 @@
 package eu.fiveminutes.newsapp.business.dao.api.converter;
 
 import android.net.Uri;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import eu.fiveminutes.newsapp.business.dao.api.models.ApiDocs;
-import eu.fiveminutes.newsapp.business.dao.api.models.ApiMultimedia;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 
 public final class ApiConverterImpl implements ApiConverter {

@@ -2,8 +2,6 @@ package eu.fiveminutes.newsapp.model;
 
 import android.net.Uri;
 
-import java.util.List;
-
 public final class NewsArticle {
 
     public final String mainHeadline;

@@ -3,14 +3,14 @@
     android:shape="rectangle">
     <gradient
 
-        android:startColor="#800000"
-        android:endColor="#4D0707"
-        android:angle="-270" />
+        android:angle="270"
+        android:endColor="#3b7fba"
+        android:startColor="#7777"/>
     <corners
-        android:bottomRightRadius="7dp"
-        android:bottomLeftRadius="7dp"
-        android:topLeftRadius="7dp"
-        android:topRightRadius="7dp"/>
+        android:bottomLeftRadius="@dimen/news_item_list_corners"
+        android:bottomRightRadius="@dimen/news_item_list_corners"
+        android:topLeftRadius="@dimen/news_item_list_corners"
+        android:topRightRadius="@dimen/news_item_list_corners"/>
 
 </shape>
 

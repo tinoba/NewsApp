@@ -5,4 +5,5 @@
     <string name="news_database_error_text">News fetch failed</string>
     <string name="news_api_error_text">News fetch failed</string>
     <string name="main_activity_name">Today\'s news</string>
+    <string name="news_image">newsImage</string>
 </resources>
