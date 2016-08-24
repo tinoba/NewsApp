@@ -68,6 +68,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
     }
 
     private static final class GetArticlesTask extends AsyncTask<Void, Void, Boolean> {
+
         private final ArticleRepository articleRepository;
         private final WeakReference<NewsListView> newsListViewWeakReference;
 
@@ -105,6 +106,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
     }
 
     private static final class GetNewsCallbackImpl implements Callback<ApiNews> {
+
         private final ApiConverter apiConverter;
         private final WeakReference<NewsListView> newsListViewWeakReference;
         private final ResourceUtils resourceUtils;
