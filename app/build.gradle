@@ -15,6 +15,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "NEWS_API_ENDPOINT", "\"http://nytimes.com/\""
+        }
+        debug {
+            buildConfigField "String", "NEWS_API_ENDPOINT", "\"http://nytimes.com/\""
         }
     }
 }
@@ -28,4 +32,5 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

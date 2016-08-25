@@ -2,6 +2,7 @@ package eu.fiveminutes.newsapp.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -55,46 +56,44 @@ public final class NewsDetailActivity extends AppCompatActivity {
         public final String webUrl;
         public final String snippet;
         public final String mainHeadline;
+        public final Uri imgUri;
 
         public NewsArticleParcelable(NewsArticle article) {
             this.webUrl = article.webUrl;
             this.snippet = article.snippet;
             this.mainHeadline = article.mainHeadline;
+            this.imgUri = article.imgUri;
         }
 
         public NewsArticle toMewsArticle() {
-            return new NewsArticle(mainHeadline, snippet, webUrl);
+            return new NewsArticle(mainHeadline, snippet, webUrl, imgUri);
         }
 
         @Override
-        public int describeContents() {
-            return 0;
-        }
+        public int describeContents() { return 0; }
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(this.webUrl);
             dest.writeString(this.snippet);
             dest.writeString(this.mainHeadline);
+            dest.writeParcelable(this.imgUri, flags);
         }
 
         protected NewsArticleParcelable(Parcel in) {
             this.webUrl = in.readString();
             this.snippet = in.readString();
             this.mainHeadline = in.readString();
+            this.imgUri = in.readParcelable(Uri.class.getClassLoader());
         }
 
-        public static final Parcelable.Creator<NewsArticleParcelable> CREATOR = new Parcelable.Creator<NewsArticleParcelable>() {
+        public static final Creator<NewsArticleParcelable> CREATOR = new Creator<NewsArticleParcelable>() {
 
             @Override
-            public NewsArticleParcelable createFromParcel(Parcel source) {
-                return new NewsArticleParcelable(source);
-            }
+            public NewsArticleParcelable createFromParcel(Parcel source) {return new NewsArticleParcelable(source);}
 
             @Override
-            public NewsArticleParcelable[] newArray(int size) {
-                return new NewsArticleParcelable[size];
-            }
+            public NewsArticleParcelable[] newArray(int size) {return new NewsArticleParcelable[size];}
         };
     }
 }

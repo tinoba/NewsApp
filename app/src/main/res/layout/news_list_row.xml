@@ -1,16 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/txtHeadline"
-        android:id="@+id/txtHeadline"
-        android:layout_weight="0.08"
-        android:gravity="center" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/nest_item_list_top_bottom_margin"
+        android:layout_marginLeft="@dimen/news_item_list_left_right_margin"
+        android:layout_marginRight="@dimen/news_item_list_left_right_margin"
+        android:layout_marginTop="@dimen/nest_item_list_top_bottom_margin"
+        android:background="@drawable/news_list_item_shape"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/activity_main_news_list_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="@dimen/news_item_list_views_margin"
+                android:layout_marginTop="@dimen/news_item_list_views_margin"
+                android:contentDescription="@string/news_image"/>
+
+            <TextView
+                android:id="@+id/txtHeadline"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/news_item_list_left_right_margin"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:layout_marginRight="@dimen/news_item_list_views_margin"
+                android:gravity="center"
+                android:text="@string/txtHeadline"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/activity_main_news_list_snippet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/news_item_list_views_margin"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    </LinearLayout>
+</FrameLayout>

@@ -1,14 +1,18 @@
 package eu.fiveminutes.newsapp.model;
 
+import android.net.Uri;
+
 public final class NewsArticle {
 
-    public final String webUrl;
-    public final String snippet;
     public final String mainHeadline;
+    public final String snippet;
+    public final String webUrl;
+    public final Uri imgUri;
 
-    public NewsArticle(String mainHeadline, String snippet, String webUrl) {
-        this.mainHeadline = mainHeadline;
-        this.snippet = snippet;
+    public NewsArticle(final String mainHeadline, final String snippet, final String webUrl, final Uri imgUri) {
         this.webUrl = webUrl;
+        this.snippet = snippet;
+        this.mainHeadline = mainHeadline;
+        this.imgUri = imgUri;
     }
 }
