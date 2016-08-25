@@ -1,9 +1,6 @@
 package eu.fiveminutes.newsapp.ui.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import eu.fiveminutes.news_app_2.R;
@@ -12,7 +9,9 @@ import eu.fiveminutes.newsapp.ui.fragment.NewsDetailFragment;
 import eu.fiveminutes.newsapp.ui.fragment.NewsListFragment;
 import eu.fiveminutes.newsapp.ui.fragment.TitleListener;
 
-public final class MainActivity extends AppCompatActivity implements TitleListener, NewsListFragment.NewsListFragmentListener {
+import static eu.fiveminutes.newsapp.ui.fragment.NewsListFragment.NewsListFragmentListener;
+
+public final class MainActivity extends AppCompatActivity implements TitleListener, NewsListFragmentListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
