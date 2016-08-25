@@ -16,13 +16,13 @@ public final class ApiConverterImpl implements ApiConverter {
     public List<NewsArticle> convertToNewsArticles(final List<ApiDocs> apiDocs) {
         final List<NewsArticle> articles = new ArrayList<>(apiDocs.size());
         for (ApiDocs docs : apiDocs) {
-            articles.add(newsArticleMapper(docs));
+            articles.add(mapToNewsArticle(docs));
         }
 
         return articles;
     }
 
-    private NewsArticle newsArticleMapper(final ApiDocs docs) {
+    private NewsArticle mapToNewsArticle(final ApiDocs docs) {
         if (docs.multimedia.isEmpty()) {
             return new NewsArticle(docs.headline.mainHeadline, docs.snippet, docs.webUrl, Uri.EMPTY);
         } else {
