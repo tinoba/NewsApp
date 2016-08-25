@@ -30,7 +30,7 @@ import eu.fiveminutes.newsapp.ui.presenter.NewsListViewModel;
 
 public final class NewsListFragment extends Fragment implements NewsListView, OnRefreshListener {
 
-    public interface NewsListFragmentListener {
+    public interface NewsListFragmentListener extends TitleListener{
 
         void showDetailFragment(NewsArticle article);
     }
@@ -45,7 +45,6 @@ public final class NewsListFragment extends Fragment implements NewsListView, On
     protected TextView errorMessage;
 
     private NewsListPresenter presenter;
-    private TitleListener titleListener;
     private NewsListAdapter newsAdapter;
     private NewsListFragmentListener newsListFragmentListener;
 
@@ -53,16 +52,10 @@ public final class NewsListFragment extends Fragment implements NewsListView, On
     public void onAttach(final Context context) {
         super.onAttach(context);
 
-        if (context instanceof TitleListener) {
-            titleListener = (TitleListener) context;
-        } else {
-            throw new ClassCastException(getString(R.string.interfaceException,context.toString(),TitleListener.class.toString()));
-        }
-
         if (context instanceof NewsListFragmentListener) {
             newsListFragmentListener = (NewsListFragmentListener) context;
         } else {
-            throw new ClassCastException(getString(R.string.interfaceException,context.toString(),NewsListFragmentListener.class.toString()));
+            throw new ClassCastException(getString(R.string.interfaceException, context.toString(), NewsListFragmentListener.class.toString()));
         }
     }
 
@@ -72,7 +65,7 @@ public final class NewsListFragment extends Fragment implements NewsListView, On
         final View view = inflater.inflate(R.layout.activity_main, container, false);
         ButterKnife.bind(this, view);
 
-        titleListener.setTitle(getString(R.string.main_activity_name));
+        newsListFragmentListener.setTitle(getString(R.string.main_activity_name));
         final ObjectGraph objectGraph = ((NewsApp) getActivity().getApplication()).getObjectGraph();
         presenter = objectGraph.createNewsListPresenter();
         newsSwipe.setOnRefreshListener(this);
