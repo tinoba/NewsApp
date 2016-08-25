@@ -43,7 +43,7 @@ public final class MainActivity extends AppCompatActivity implements NewsListVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.main_activity_name);
         }
         final ObjectGraph objectGraph = ((NewsApp) getApplication()).getObjectGraph();
