@@ -4,6 +4,8 @@ public final class DatabaseContract {
 
     public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "tasksManager";
+    public static final String TYPE_TEXT = "TEXT";
+    public static final String TYPE_INTEGER = "INTEGER";
 
     public static final class NewsArticleTable {
 
@@ -16,10 +18,10 @@ public final class DatabaseContract {
         public static final String KEY_IMG_URL = "img_url";
 
         public static final String CREATE_ARTICLES_TABLE = "CREATE TABLE " + TABLE_ARTICLES + "("
-                + NewsArticleTable.KEY_ID + " INTEGER PRIMARY KEY, " + NewsArticleTable.KEY_HEADLINE + " TEXT, "
-                + NewsArticleTable.KEY_SNIPPET + " TEXT, " + NewsArticleTable.KEY_WEB_URL + " TEXT, " + NewsArticleTable.KEY_IMG_URL + " TEXT)";
+                + KEY_ID + " "+TYPE_INTEGER+" PRIMARY KEY, " + KEY_HEADLINE + " "+TYPE_TEXT+", "
+                + KEY_SNIPPET + " "+TYPE_TEXT+", " + KEY_WEB_URL + " "+TYPE_TEXT+", " + KEY_IMG_URL + " "+TYPE_TEXT+")";
 
-        public static final String SELECT_ALL_ARTICLES = "SELECT * FROM " + DatabaseContract.NewsArticleTable.TABLE_ARTICLES;
+        public static final String SELECT_ALL_ARTICLES = "SELECT * FROM " + TABLE_ARTICLES;
 
         public static final String DROP_ARTICLES_TABLE = "DROP TABLE IF EXISTS " + TABLE_ARTICLES;
     }
