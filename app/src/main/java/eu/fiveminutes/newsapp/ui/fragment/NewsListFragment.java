@@ -56,13 +56,13 @@ public final class NewsListFragment extends Fragment implements NewsListView, On
         if (context instanceof TitleListener) {
             titleListener = (TitleListener) context;
         } else {
-            throw new ClassCastException(context.toString() + getString(R.string.interfaceException));
+            throw new ClassCastException(getString(R.string.interfaceException,context.toString(),TitleListener.class.toString()));
         }
 
         if (context instanceof NewsListFragmentListener) {
             newsListFragmentListener = (NewsListFragmentListener) context;
         } else {
-            throw new ClassCastException(context.toString() + getString(R.string.interfaceException));
+            throw new ClassCastException(getString(R.string.interfaceException,context.toString(),NewsListFragmentListener.class.toString()));
         }
     }
 
