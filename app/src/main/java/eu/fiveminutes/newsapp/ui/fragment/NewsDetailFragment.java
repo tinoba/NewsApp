@@ -46,7 +46,7 @@ public final class NewsDetailFragment extends Fragment {
         final Bundle arguments = this.getArguments();
         if (arguments != null) {
             articleParcelable = arguments.getParcelable(NEWS_DETAIL);
-            article = articleParcelable.toMewsArticle();
+            article = articleParcelable.toNewsArticle();
         }
         webviewNews.setWebViewClient(new WebViewClient());
 
@@ -67,7 +67,7 @@ public final class NewsDetailFragment extends Fragment {
         if (context instanceof TitleListener) {
             titleListener = (TitleListener) context;
         } else {
-            throw new RuntimeException(context.toString() + getString(R.string.interfaceException));
+            throw new RuntimeException(getString(R.string.interfaceException, context.toString(), TitleListener.class.toString()));
         }
     }
 
@@ -85,7 +85,7 @@ public final class NewsDetailFragment extends Fragment {
             this.imgUri = article.imgUri;
         }
 
-        public NewsArticle toMewsArticle() {
+        public NewsArticle toNewsArticle() {
             return new NewsArticle(mainHeadline, snippet, webUrl, imgUri);
         }
 
