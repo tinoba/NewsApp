@@ -109,7 +109,6 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
         private final ApiConverter apiConverter;
         private final WeakReference<NewsListView> newsListViewWeakReference;
         private final ResourceUtils resourceUtils;
-
         private final NewsListPresenterImpl newsListPresenterimpl;
 
         private GetNewsCallbackImpl(final ApiConverter apiConverter, final WeakReference<NewsListView> newsListViewWeakReference,
@@ -169,7 +168,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
         protected void onPostExecute(Boolean result) {
             final NewsListView view = newsListViewWeakReference.get();
             if (view != null) {
-                if (result == true) {
+                if (result) {
                     Log.i("TAG", "News saved successfully");
                 } else {
 
