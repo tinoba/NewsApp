@@ -7,4 +7,6 @@
     <string name="main_activity_name">Today\'s news</string>
     <string name="news_image">newsImage</string>
     <string name="interfaceException">%1$s must imeplement %2$s</string>
+    <string name="newsdetailloadingimage">newsDetailLoadingImage</string>
+    <string name="newslistloadingimage">newsListLoadingImage</string>
 </resources>

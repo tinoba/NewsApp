@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,8 +26,11 @@ public final class NewsDetailFragment extends Fragment {
     private NewsArticleParcelable articleParcelable;
     private TitleListener titleListener;
 
-    @BindView(R.id.webViewNews)
-    protected WebView webviewNews;
+    @BindView(R.id.news_detail_fragment_web_view)
+    protected WebView newsDetailWebView;
+
+    @BindView(R.id.news_detail_loading_bar)
+    protected ProgressBar newsDetailLoadingBar;
 
     public static NewsDetailFragment getNewsDetailFragment(final NewsArticle article) {
         final NewsDetailFragment newsDetailFragment = new NewsDetailFragment();
@@ -40,7 +44,7 @@ public final class NewsDetailFragment extends Fragment {
 
     @Override
     public final View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.activity_news_detail, container, false);
+        final View view = inflater.inflate(R.layout.fragment_news_detail, container, false);
         ButterKnife.bind(this, view);
 
         final Bundle arguments = this.getArguments();
@@ -48,7 +52,6 @@ public final class NewsDetailFragment extends Fragment {
             articleParcelable = arguments.getParcelable(NEWS_DETAIL);
             article = articleParcelable.toNewsArticle();
         }
-        webviewNews.setWebViewClient(new WebViewClient());
 
         return view;
     }
@@ -57,7 +60,14 @@ public final class NewsDetailFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        webviewNews.loadUrl(article.webUrl);
+        newsDetailWebView.setWebViewClient(new WebViewClient() {
+
+            public void onPageFinished(final WebView webView, final String url) {
+                newsDetailLoadingBar.setVisibility(View.GONE);
+                webView.setVisibility(View.VISIBLE);
+            }
+        });
+        newsDetailWebView.loadUrl(article.webUrl);
         titleListener.setTitle(article.mainHeadline);
     }
 

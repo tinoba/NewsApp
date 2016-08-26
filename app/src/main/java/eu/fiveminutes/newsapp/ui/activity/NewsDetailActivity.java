@@ -21,8 +21,8 @@ public final class NewsDetailActivity extends AppCompatActivity {
 
     private NewsArticle article;
 
-    @BindView(R.id.webViewNews)
-    protected WebView webviewNews;
+    @BindView(R.id.news_detail_fragment_web_view)
+    protected WebView newsDetailWebView;
 
     public static Intent createIntent(final Context context, final NewsArticle article) {
         final Intent intent = new Intent(context, NewsDetailActivity.class);
@@ -34,20 +34,20 @@ public final class NewsDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news_detail);
+        setContentView(R.layout.fragment_news_detail);
         ButterKnife.bind(this);
 
         final Intent intent = getIntent();
         final NewsArticleParcelable articleParcelable = intent.getExtras().getParcelable(NEWS_DETAIL);
         article = articleParcelable.toMewsArticle();
-        webviewNews.setWebViewClient(new WebViewClient());
+        newsDetailWebView.setWebViewClient(new WebViewClient());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        webviewNews.loadUrl(article.webUrl);
+        newsDetailWebView.loadUrl(article.webUrl);
         getSupportActionBar().setTitle(article.mainHeadline);
     }
 
