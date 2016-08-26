@@ -32,10 +32,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/news_item_list_left_right_margin"
-                android:ellipsize="end"
-                android:maxLines="2"
                 android:layout_marginRight="@dimen/news_item_list_views_margin"
+                android:ellipsize="end"
                 android:gravity="center"
+                android:maxLines="2"
                 android:text="@string/txtHeadline"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
 
@@ -45,9 +45,9 @@
             android:id="@+id/activity_main_news_list_snippet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/news_item_list_views_margin"
             android:ellipsize="end"
             android:maxLines="3"
-            android:layout_margin="@dimen/news_item_list_views_margin"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     </LinearLayout>
