@@ -38,7 +38,6 @@ public final class MainActivity extends AppCompatActivity implements TitleListen
 
     @Override
     public void showDetailFragment(final NewsArticle article) {
-        new NewsDetailFragment();
         getSupportFragmentManager().beginTransaction()
                                    .replace(R.id.fragment_container, NewsDetailFragment.getNewsDetailFragment(article))
                                    .addToBackStack(null)
