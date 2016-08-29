@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -71,8 +72,8 @@ public final class NewsDetailFragment extends Fragment {
         newsDetailWebView.setWebViewClient(new WebViewClient() {
 
             @Override
-            public void onLoadResource(final WebView view, final String url) {
-                super.onLoadResource(view, url);
+            public void onPageFinished(final WebView view, final String url) {
+                super.onPageFinished(view, url);
                 newsDetailLoadingBar.setVisibility(View.GONE);
                 view.setVisibility(View.VISIBLE);
             }
@@ -87,14 +88,14 @@ public final class NewsDetailFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
-        inflater.inflate(R.menu.news_detail_menu,menu);
+        inflater.inflate(R.menu.news_detail_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.news_detail_refresh:
                 newsDetailWebView.loadUrl(article.webUrl);
                 return true;
