@@ -5,8 +5,8 @@
 
     <gradient
         android:angle="270"
-        android:endColor="@color/newsListGradientEnd"
-        android:startColor="@color/newsListGradientStart"/>
+        android:endColor="#6fa35d"
+        android:startColor="#9dbe66"/>
 
     <corners
         android:bottomLeftRadius="@dimen/news_item_list_corners"
