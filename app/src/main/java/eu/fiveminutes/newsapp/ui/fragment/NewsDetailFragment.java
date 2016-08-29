@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -32,7 +34,7 @@ public final class NewsDetailFragment extends Fragment {
     @BindView(R.id.news_detail_loading_bar)
     protected ProgressBar newsDetailLoadingBar;
 
-    public static NewsDetailFragment getNewsDetailFragment(final NewsArticle article) {
+    public static NewsDetailFragment newInstance(final NewsArticle article) {
         final NewsDetailFragment newsDetailFragment = new NewsDetailFragment();
         final Bundle bundle = new Bundle();
 
@@ -62,13 +64,19 @@ public final class NewsDetailFragment extends Fragment {
 
         newsDetailWebView.setWebViewClient(new WebViewClient() {
 
-            public void onPageFinished(final WebView webView, final String url) {
+            @Override
+            public void onLoadResource(final WebView view, final String url) {
+                super.onLoadResource(view, url);
                 newsDetailLoadingBar.setVisibility(View.GONE);
-                webView.setVisibility(View.VISIBLE);
+                view.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onReceivedError(final WebView view, final WebResourceRequest request, final WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                view.stopLoading();
             }
         });
-        newsDetailWebView.loadUrl(article.webUrl);
-        titleListener.setTitle(article.mainHeadline);
     }
 
     @Override
@@ -79,6 +87,12 @@ public final class NewsDetailFragment extends Fragment {
         } else {
             throw new RuntimeException(getString(R.string.interfaceException, context.toString(), TitleListener.class.toString()));
         }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        newsDetailWebView.stopLoading();
     }
 
     public static final class NewsArticleParcelable implements Parcelable {
