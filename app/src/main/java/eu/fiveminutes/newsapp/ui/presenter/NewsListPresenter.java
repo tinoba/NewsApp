@@ -4,5 +4,8 @@ public interface NewsListPresenter {
 
     void loadNews();
 
+    void activate();
+
     void setView(NewsListView view);
+
 }

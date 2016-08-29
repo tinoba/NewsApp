@@ -47,6 +47,7 @@ public final class NewsListAdapter extends ArrayAdapter<NewsArticle> {
         Picasso.with(context)
                .load(article.imgUri)
                .resize(NEWS_LIST_IMAGE_SIZE, NEWS_LIST_IMAGE_SIZE)
+               .centerCrop()
                .placeholder(R.mipmap.ic_launcher)
                .into(holder.newsListImage);
         holder.newsListSnippet.setText(article.snippet);
