@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">news-app-2</string>
+    <string name="app_name">New York Times</string>
     <string name="download">Download</string>
     <string name="txtHeadline">Headline</string>
     <string name="news_database_error_text">News fetch failed</string>

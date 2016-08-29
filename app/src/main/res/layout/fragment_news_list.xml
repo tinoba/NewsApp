@@ -24,6 +24,7 @@
         <ListView
             android:id="@+id/activity_main_news_list"
             android:layout_width="match_parent"
+            android:dividerHeight="5dp"
             android:layout_height="match_parent"
             android:visibility="gone"/>
 

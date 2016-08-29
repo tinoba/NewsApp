@@ -6,10 +6,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/nest_item_list_top_bottom_margin"
         android:layout_marginBottom="@dimen/nest_item_list_top_bottom_margin"
-        android:layout_marginRight="@dimen/news_item_list_left_right_margin"
         android:layout_marginLeft="@dimen/news_item_list_left_right_margin"
+        android:layout_marginRight="@dimen/news_item_list_left_right_margin"
+        android:layout_marginTop="@dimen/nest_item_list_top_bottom_margin"
         android:background="@drawable/news_list_item_shape"
         android:orientation="vertical"
         android:weightSum="1">
