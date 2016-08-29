@@ -9,8 +9,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,10 +28,13 @@ public final class NewsDetailFragment extends Fragment {
     private NewsArticleParcelable articleParcelable;
     private TitleListener titleListener;
 
-    @BindView(R.id.webViewNews)
-    protected WebView webviewNews;
+    @BindView(R.id.news_detail_fragment_web_view)
+    protected WebView newsDetailWebView;
 
-    public static NewsDetailFragment getNewsDetailFragment(final NewsArticle article) {
+    @BindView(R.id.news_detail_loading_bar)
+    protected ProgressBar newsDetailLoadingBar;
+
+    public static NewsDetailFragment newInstance(final NewsArticle article) {
         final NewsDetailFragment newsDetailFragment = new NewsDetailFragment();
         final Bundle bundle = new Bundle();
 
@@ -40,7 +46,7 @@ public final class NewsDetailFragment extends Fragment {
 
     @Override
     public final View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.activity_news_detail, container, false);
+        final View view = inflater.inflate(R.layout.fragment_news_detail, container, false);
         ButterKnife.bind(this, view);
 
         final Bundle arguments = this.getArguments();
@@ -48,7 +54,6 @@ public final class NewsDetailFragment extends Fragment {
             articleParcelable = arguments.getParcelable(NEWS_DETAIL);
             article = articleParcelable.toNewsArticle();
         }
-        webviewNews.setWebViewClient(new WebViewClient());
 
         return view;
     }
@@ -57,8 +62,21 @@ public final class NewsDetailFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        webviewNews.loadUrl(article.webUrl);
-        titleListener.setTitle(article.mainHeadline);
+        newsDetailWebView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public void onLoadResource(final WebView view, final String url) {
+                super.onLoadResource(view, url);
+                newsDetailLoadingBar.setVisibility(View.GONE);
+                view.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onReceivedError(final WebView view, final WebResourceRequest request, final WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                view.stopLoading();
+            }
+        });
     }
 
     @Override
@@ -69,6 +87,12 @@ public final class NewsDetailFragment extends Fragment {
         } else {
             throw new RuntimeException(getString(R.string.interfaceException, context.toString(), TitleListener.class.toString()));
         }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        newsDetailWebView.stopLoading();
     }
 
     public static final class NewsArticleParcelable implements Parcelable {

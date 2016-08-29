@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,9 +44,26 @@ public final class NewsListFragment extends Fragment implements NewsListView, On
     @BindView(R.id.activity_main_error_message)
     protected TextView errorMessage;
 
+    @BindView(R.id.news_list_loading_bar)
+    protected ProgressBar newsListLoadingBar;
+
     private NewsListPresenter presenter;
     private NewsListAdapter newsAdapter;
     private NewsListFragmentListener newsListFragmentListener;
+
+    @Override
+    public final View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                                   final Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.fragment_news_list, container, false);
+        ButterKnife.bind(this, view);
+
+        newsListFragmentListener.setTitle(getString(R.string.main_activity_name));
+        final ObjectGraph objectGraph = ((NewsApp) getActivity().getApplication()).getObjectGraph();
+        presenter = objectGraph.createNewsListPresenter();
+        newsSwipe.setOnRefreshListener(this);
+        setNewsListAdapter();
+        return view;
+    }
 
     @Override
     public void onAttach(final Context context) {
@@ -56,20 +74,6 @@ public final class NewsListFragment extends Fragment implements NewsListView, On
         } else {
             throw new ClassCastException(getString(R.string.interfaceException, context.toString(), NewsListFragmentListener.class.toString()));
         }
-    }
-
-    @Override
-    public final View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-                                   final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.activity_main, container, false);
-        ButterKnife.bind(this, view);
-
-        newsListFragmentListener.setTitle(getString(R.string.main_activity_name));
-        final ObjectGraph objectGraph = ((NewsApp) getActivity().getApplication()).getObjectGraph();
-        presenter = objectGraph.createNewsListPresenter();
-        newsSwipe.setOnRefreshListener(this);
-        setNewsListAdapter();
-        return view;
     }
 
     @OnItemClick(R.id.activity_main_news_list)
@@ -84,16 +88,27 @@ public final class NewsListFragment extends Fragment implements NewsListView, On
         activityMainNewsList.setAdapter(newsAdapter);
     }
 
+    public void showNews(final List<NewsArticle> articles) {
+        newsAdapter.clear();
+        newsAdapter.addAll(articles);
+    }
+
+    private void showToast(final String message) {
+        final Toast toast = Toast.makeText(getActivity(), message, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
+    private void removeLoadingBar() {
+        newsListLoadingBar.setVisibility(View.GONE);
+        activityMainNewsList.setVisibility(View.VISIBLE);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         presenter.setView(this);
         presenter.loadNews();
-    }
-
-    public void showNews(final List<NewsArticle> articles) {
-        newsAdapter.clear();
-        newsAdapter.addAll(articles);
     }
 
     @Override
@@ -104,18 +119,13 @@ public final class NewsListFragment extends Fragment implements NewsListView, On
         } else {
             showNews(viewModel.articles);
         }
+        removeLoadingBar();
         newsSwipe.setRefreshing(viewModel.showRefreshing);
     }
 
     @Override
     public void showErrorMessage(final String message) {
         showToast(message);
-    }
-
-    private void showToast(final String message) {
-        final Toast toast = Toast.makeText(getActivity(), message, Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
     }
 
     @Override
