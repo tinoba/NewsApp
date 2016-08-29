@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,13 +22,12 @@ import android.widget.ProgressBar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.fiveminutes.news_app_2.R;
-import eu.fiveminutes.newsapp.application.NewsApp;
 import eu.fiveminutes.newsapp.application.ObjectGraph;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 import eu.fiveminutes.newsapp.ui.presenter.NewsDetailPresenter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsDetailView;
 
-public final class NewsDetailFragment extends Fragment implements NewsDetailView {
+public final class NewsDetailFragment extends BaseFragment implements NewsDetailView {
 
     private static final String NEWS_DETAIL = "NEWS_DETAIL";
 
@@ -44,11 +42,6 @@ public final class NewsDetailFragment extends Fragment implements NewsDetailView
     @BindView(R.id.news_detail_loading_bar)
     protected ProgressBar newsDetailLoadingBar;
 
-    private void setWebView() {
-        newsDetailWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        newsDetailWebView.loadUrl(article.webUrl);
-    }
-
     public static NewsDetailFragment newInstance(final NewsArticle article) {
         final NewsDetailFragment newsDetailFragment = new NewsDetailFragment();
         final Bundle bundle = new Bundle();
@@ -59,13 +52,13 @@ public final class NewsDetailFragment extends Fragment implements NewsDetailView
         return newsDetailFragment;
     }
 
-    private void setWebViewSettings() {
-    }
-
     @Override
     public void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final ObjectGraph objectGraph = ((NewsApp) getActivity().getApplication()).getObjectGraph();
+    }
+
+    @Override
+    protected void inject(final ObjectGraph objectGraph) {
         presenter = objectGraph.provideNewsDetailPresenter();
     }
 
@@ -75,7 +68,6 @@ public final class NewsDetailFragment extends Fragment implements NewsDetailView
         ButterKnife.bind(this, view);
 
         setHasOptionsMenu(true);
-        setWebViewSettings();
         final Bundle arguments = this.getArguments();
         if (arguments != null) {
             articleParcelable = arguments.getParcelable(NEWS_DETAIL);
@@ -141,6 +133,11 @@ public final class NewsDetailFragment extends Fragment implements NewsDetailView
     public void onDetach() {
         super.onDetach();
         newsDetailWebView.stopLoading();
+    }
+
+    private void setWebView() {
+        newsDetailWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        newsDetailWebView.loadUrl(article.webUrl);
     }
 
     public static final class NewsArticleParcelable implements Parcelable {

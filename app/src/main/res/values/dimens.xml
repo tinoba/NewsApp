@@ -7,5 +7,6 @@
     <dimen name="news_item_list_left_right_margin">8dp</dimen>
     <dimen name="news_item_list_views_margin">10dp</dimen>
     <dimen name="news_item_list_corners">7dp</dimen>
+    <dimen name="news_list_divider_height">5dp</dimen>
 
 </resources>
