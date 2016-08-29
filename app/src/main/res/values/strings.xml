@@ -9,4 +9,5 @@
     <string name="interfaceException">%1$s must imeplement %2$s</string>
     <string name="newsdetailloadingimage">newsDetailLoadingImage</string>
     <string name="newslistloadingimage">newsListLoadingImage</string>
+    <string name="news_detail_refresh">news_detail_refresh</string>
 </resources>

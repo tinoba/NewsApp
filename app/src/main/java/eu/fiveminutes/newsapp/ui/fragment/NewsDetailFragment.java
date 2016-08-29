@@ -7,6 +7,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebResourceError;
@@ -49,6 +52,7 @@ public final class NewsDetailFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_news_detail, container, false);
         ButterKnife.bind(this, view);
 
+        setHasOptionsMenu(true);
         final Bundle arguments = this.getArguments();
         if (arguments != null) {
             articleParcelable = arguments.getParcelable(NEWS_DETAIL);
@@ -62,6 +66,8 @@ public final class NewsDetailFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
+        newsDetailWebView.loadUrl(article.webUrl);
+        titleListener.setTitle(article.mainHeadline);
         newsDetailWebView.setWebViewClient(new WebViewClient() {
 
             @Override
@@ -77,6 +83,24 @@ public final class NewsDetailFragment extends Fragment {
                 view.stopLoading();
             }
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+        inflater.inflate(R.menu.news_detail_menu,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.news_detail_refresh:
+                newsDetailWebView.loadUrl(article.webUrl);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
