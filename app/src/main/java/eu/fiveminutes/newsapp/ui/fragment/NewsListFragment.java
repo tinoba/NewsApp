@@ -3,10 +3,8 @@ package eu.fiveminutes.newsapp.ui.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +20,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import eu.fiveminutes.news_app_2.R;
-import eu.fiveminutes.newsapp.application.NewsApp;
 import eu.fiveminutes.newsapp.application.ObjectGraph;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 import eu.fiveminutes.newsapp.ui.adapter.NewsListAdapter;
@@ -30,7 +27,7 @@ import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListView;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListViewModel;
 
-public final class NewsListFragment extends Fragment implements NewsListView, OnRefreshListener {
+public final class NewsListFragment extends BaseFragment implements NewsListView, OnRefreshListener {
 
     public interface NewsListFragmentListener extends TitleListener {
 
@@ -57,8 +54,6 @@ public final class NewsListFragment extends Fragment implements NewsListView, On
     public void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final ObjectGraph objectGraph = ((NewsApp) getActivity().getApplication()).getObjectGraph();
-        presenter = objectGraph.createNewsListPresenter();
         newsListFragmentListener.setTitle(getString(R.string.main_activity_name));
     }
 
@@ -94,6 +89,11 @@ public final class NewsListFragment extends Fragment implements NewsListView, On
     @Override
     public void onPause() {
         super.onPause();
+    }
+
+    @Override
+    protected void inject(final ObjectGraph objectGraph) {
+        presenter = objectGraph.createNewsListPresenter();
     }
 
     @OnItemClick(R.id.activity_main_news_list)

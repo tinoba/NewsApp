@@ -1,10 +1,12 @@
 package eu.fiveminutes.newsapp.ui.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
 import eu.fiveminutes.news_app_2.R;
 import eu.fiveminutes.newsapp.model.NewsArticle;
+import eu.fiveminutes.newsapp.ui.fragment.BaseFragment;
 import eu.fiveminutes.newsapp.ui.fragment.NewsDetailFragment;
 import eu.fiveminutes.newsapp.ui.fragment.NewsListFragment;
 import eu.fiveminutes.newsapp.ui.fragment.TitleListener;
