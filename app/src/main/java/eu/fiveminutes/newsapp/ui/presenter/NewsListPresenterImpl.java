@@ -29,6 +29,10 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
 
     private WeakReference<NewsListView> newsListViewWeakReference;
 
+    private List<NewsArticle> articles;
+
+    private boolean loadData = true;
+
     public NewsListPresenterImpl(final ApiConverter apiConverter, final NetworkService service,
                                  final ArticleRepository articleRepository, final NetworkInformation networkInformation,
                                  final ResourceUtils resourceUtils) {
@@ -42,6 +46,17 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
     @Override
     public void setView(final NewsListView view) {
         newsListViewWeakReference = new WeakReference<>(view);
+    }
+
+    @Override
+    public void activate() {
+        if (loadData) {
+            loadNews();
+            loadData = false;
+        } else {
+            final NewsListView view = newsListViewWeakReference.get();
+            view.renderView(new NewsListViewModel(false, articles, false));
+        }
     }
 
     @Override
@@ -59,7 +74,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
     }
 
     private void getDataFromDatabase() {
-        new GetArticlesTask(articleRepository, newsListViewWeakReference).execute();
+        new GetArticlesTask(articleRepository, newsListViewWeakReference, this).execute();
     }
 
     private void addNewsToDatabase(final List<NewsArticle> articles) {
@@ -70,12 +85,15 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
 
         private final ArticleRepository articleRepository;
         private final WeakReference<NewsListView> newsListViewWeakReference;
+        private final NewsListPresenterImpl newsListPresenterimpl;
 
         private List<NewsArticle> articles;
 
-        private GetArticlesTask(final ArticleRepository articleRepository, final WeakReference<NewsListView> newsListViewWeakReference) {
+        private GetArticlesTask(final ArticleRepository articleRepository, final WeakReference<NewsListView> newsListViewWeakReference,
+                                NewsListPresenterImpl newsListPresenterimpl) {
             this.articleRepository = articleRepository;
             this.newsListViewWeakReference = newsListViewWeakReference;
+            this.newsListPresenterimpl = newsListPresenterimpl;
         }
 
         @Override
@@ -97,6 +115,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
                     if (articles.isEmpty()) {
                         view.renderView(new NewsListViewModel(false, new ArrayList<NewsArticle>(), true));
                     } else {
+                        newsListPresenterimpl.articles = articles;
                         view.renderView(new NewsListViewModel(false, articles, false));
                     }
                 }
@@ -125,6 +144,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
             if (view != null) {
                 final List<NewsArticle> articles = apiConverter.convertToNewsArticles(response.body().response.docs);
                 view.renderView(new NewsListViewModel(false, articles, false));
+                newsListPresenterimpl.articles = articles;
                 newsListPresenterimpl.addNewsToDatabase(articles);
             }
         }

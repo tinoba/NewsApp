@@ -2,7 +2,7 @@ package eu.fiveminutes.newsapp.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.Gravity;
@@ -20,7 +20,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import eu.fiveminutes.news_app_2.R;
-import eu.fiveminutes.newsapp.application.NewsApp;
 import eu.fiveminutes.newsapp.application.ObjectGraph;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 import eu.fiveminutes.newsapp.ui.adapter.NewsListAdapter;
@@ -28,7 +27,7 @@ import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListView;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListViewModel;
 
-public final class NewsListFragment extends Fragment implements NewsListView, OnRefreshListener {
+public final class NewsListFragment extends BaseFragment implements NewsListView, OnRefreshListener {
 
     public interface NewsListFragmentListener extends TitleListener {
 
@@ -52,16 +51,20 @@ public final class NewsListFragment extends Fragment implements NewsListView, On
     private NewsListFragmentListener newsListFragmentListener;
 
     @Override
+    public void onCreate(@Nullable final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        newsListFragmentListener.setTitle(getString(R.string.main_activity_name));
+    }
+
+    @Override
     public final View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                                    final Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_news_list, container, false);
         ButterKnife.bind(this, view);
 
-        newsListFragmentListener.setTitle(getString(R.string.main_activity_name));
-        final ObjectGraph objectGraph = ((NewsApp) getActivity().getApplication()).getObjectGraph();
-        presenter = objectGraph.createNewsListPresenter();
-        newsSwipe.setOnRefreshListener(this);
         setNewsListAdapter();
+        newsSwipe.setOnRefreshListener(this);
         return view;
     }
 
@@ -74,6 +77,23 @@ public final class NewsListFragment extends Fragment implements NewsListView, On
         } else {
             throw new ClassCastException(getString(R.string.interfaceException, context.toString(), NewsListFragmentListener.class.toString()));
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.setView(this);
+        presenter.activate();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void inject(final ObjectGraph objectGraph) {
+        presenter = objectGraph.createNewsListPresenter();
     }
 
     @OnItemClick(R.id.activity_main_news_list)
@@ -102,13 +122,6 @@ public final class NewsListFragment extends Fragment implements NewsListView, On
     private void removeLoadingBar() {
         newsListLoadingBar.setVisibility(View.GONE);
         activityMainNewsList.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        presenter.setView(this);
-        presenter.loadNews();
     }
 
     @Override

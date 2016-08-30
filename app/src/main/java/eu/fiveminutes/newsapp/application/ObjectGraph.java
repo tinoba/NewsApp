@@ -3,14 +3,16 @@ package eu.fiveminutes.newsapp.application;
 import android.app.Application;
 import android.net.ConnectivityManager;
 
+import eu.fiveminutes.newsapp.business.dao.DatabaseHelper;
+import eu.fiveminutes.newsapp.business.dao.NewsDao;
+import eu.fiveminutes.newsapp.business.dao.NewsDaoImpl;
 import eu.fiveminutes.newsapp.business.dao.api.NetworkService;
 import eu.fiveminutes.newsapp.business.dao.api.converter.ApiConverter;
 import eu.fiveminutes.newsapp.business.dao.api.converter.ApiConverterImpl;
 import eu.fiveminutes.newsapp.model.ArticleRepository;
 import eu.fiveminutes.newsapp.model.ArticleRepositoryImpl;
-import eu.fiveminutes.newsapp.business.dao.DatabaseHelper;
-import eu.fiveminutes.newsapp.business.dao.NewsDao;
-import eu.fiveminutes.newsapp.business.dao.NewsDaoImpl;
+import eu.fiveminutes.newsapp.ui.presenter.NewsDetailPresenter;
+import eu.fiveminutes.newsapp.ui.presenter.NewsDetailPresenterImpl;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenterImpl;
 import eu.fiveminutes.newsapp.utils.NetworkInformation;
@@ -79,5 +81,9 @@ public final class ObjectGraph {
 
     public NewsListPresenter createNewsListPresenter() {
         return new NewsListPresenterImpl(getApiConverter(), getNetworkService(), getArticleRepository(), getNetworkInformation(), getResourceUtils());
+    }
+
+    public NewsDetailPresenter provideNewsDetailPresenter() {
+        return new NewsDetailPresenterImpl();
     }
 }

@@ -4,7 +4,8 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="eu.fiveminutes.newsapp.ui.activity.MainActivity">
+             tools:context="eu.fiveminutes.newsapp.ui.activity.MainActivity"
+    >
 
     <TextView
         android:id="@+id/activity_main_error_message"
@@ -17,11 +18,13 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/activity_main_news_swipe"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/nest_item_list_top_bottom_margin"
         android:layout_height="match_parent">
 
         <ListView
             android:id="@+id/activity_main_news_list"
             android:layout_width="match_parent"
+            android:dividerHeight="@dimen/news_list_divider_height"
             android:layout_height="match_parent"
             android:visibility="gone"/>
 

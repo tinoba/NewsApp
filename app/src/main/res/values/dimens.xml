@@ -4,8 +4,9 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_main_error_text_size">30sp</dimen>
     <dimen name="nest_item_list_top_bottom_margin">4dp</dimen>
-    <dimen name="news_item_list_left_right_margin">16dp</dimen>
+    <dimen name="news_item_list_left_right_margin">8dp</dimen>
     <dimen name="news_item_list_views_margin">10dp</dimen>
     <dimen name="news_item_list_corners">7dp</dimen>
+    <dimen name="news_list_divider_height">5dp</dimen>
 
 </resources>
