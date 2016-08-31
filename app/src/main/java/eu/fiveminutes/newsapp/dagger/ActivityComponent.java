@@ -20,10 +20,6 @@ import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
 )
 public interface ActivityComponent {
 
-    void injectNewsDetailFragment(NewsDetailFragment fragment);
-
-    void injectNewsListFragment(NewsListFragment fragment);
-
     final class Initializer {
 
         private Initializer() {
@@ -35,10 +31,15 @@ public interface ActivityComponent {
                                           .activityModule(new ActivityModule(activity))
                                           .build();
         }
+
     }
 
     NewsListPresenter getNewsListPresenter();
 
     NewsListAdapter getNewsListAdapter();
+
+    void injectNewsListFragment(NewsListFragment fragment);
+
+    void injectNewsDetailFragment(NewsDetailFragment fragment);
 }
 

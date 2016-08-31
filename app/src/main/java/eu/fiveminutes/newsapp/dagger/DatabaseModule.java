@@ -16,13 +16,13 @@ public final class DatabaseModule {
 
     @Provides
     @Singleton
-    NewsDao provideNewsDao(NewsApplication application) {
+    NewsDao provideNewsDao(final NewsApplication application) {
         return new NewsDaoImpl(new DatabaseHelper(application));
     }
 
     @Provides
     @Singleton
-    ArticleRepository provideArticleRepository(NewsDao newsDao) {
+    ArticleRepository provideArticleRepository(final NewsDao newsDao) {
         return new ArticleRepositoryImpl(newsDao);
     }
 }

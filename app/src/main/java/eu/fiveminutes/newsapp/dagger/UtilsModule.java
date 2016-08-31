@@ -29,7 +29,7 @@ public final class UtilsModule {
 
     @Provides
     @Singleton
-    ResourceUtils provideResourceUtils(NewsApplication application) {
+    ResourceUtils provideResourceUtils(final NewsApplication application) {
         return new ResourceUtilsImpl(application.getResources());
     }
 }

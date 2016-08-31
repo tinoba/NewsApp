@@ -9,11 +9,11 @@ public final class ComponentFactory {
 
     private ComponentFactory() {}
 
-    public static final ApplicationComponent createApplicationComponent(NewsApplication newsApplication) {
+    public static final ApplicationComponent createApplicationComponent(final NewsApplication newsApplication) {
         return ApplicationComponent.Initializer.init(newsApplication);
     }
 
-    public static final ActivityComponent createActivityComponent(NewsApplication newsApplication, Activity activity) {
+    public static final ActivityComponent createActivityComponent(final NewsApplication newsApplication, final Activity activity) {
         return ActivityComponent.Initializer.init(newsApplication.getApplicationComponent(), activity);
     }
 }

@@ -26,7 +26,7 @@ public final class ApiModule {
 
     @Provides
     @Singleton
-    NewsService provideNewsService(Retrofit retrofit) {
+    NewsService provideNewsService(final Retrofit retrofit) {
         return new NewsServiceImpl(retrofit);
     }
 
