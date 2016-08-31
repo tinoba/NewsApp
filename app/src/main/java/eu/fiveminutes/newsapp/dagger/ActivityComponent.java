@@ -29,7 +29,7 @@ public interface ActivityComponent {
         private Initializer() {
         }
 
-        static public ActivityComponent init(ApplicationComponent applicationComponent, Activity activity) {
+        static public ActivityComponent init(final ApplicationComponent applicationComponent, final Activity activity) {
             return DaggerActivityComponent.builder()
                                           .applicationComponent(applicationComponent)
                                           .activityModule(new ActivityModule(activity))

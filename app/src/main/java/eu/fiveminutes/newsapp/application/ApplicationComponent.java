@@ -32,7 +32,7 @@ public interface ApplicationComponent {
         private Initializer() {
         }
 
-        static public ApplicationComponent init(NewsApplication newsApplication) {
+        static public ApplicationComponent init(final NewsApplication newsApplication) {
             return DaggerApplicationComponent.builder()
                                              .applicationModule(new ApplicationModule(newsApplication))
                                              .apiModule(new ApiModule())
