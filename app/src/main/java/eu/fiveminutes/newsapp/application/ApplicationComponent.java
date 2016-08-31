@@ -23,7 +23,7 @@ import eu.fiveminutes.newsapp.utils.ResourceUtils;
         }
 )
 
-public interface ApplicationComponent {
+public interface ApplicationComponent extends ApplicationComponentInjects {
 
     final class Initializer {
 
@@ -36,8 +36,8 @@ public interface ApplicationComponent {
                                              .apiModule(new ApiModule())
                                              .build();
         }
-
     }
+
     NewsService getNewsService();
 
     NetworkInformation getNetworkInformation();
@@ -47,6 +47,4 @@ public interface ApplicationComponent {
     ApiConverter getApiConverter();
 
     ArticleRepository articleRepository();
-
-    void inject(NewsApplication newsApplication);
 }

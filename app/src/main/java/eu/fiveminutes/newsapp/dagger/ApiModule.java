@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import eu.fiveminutes.news_app_2.BuildConfig;
+import eu.fiveminutes.newsapp.business.dao.api.NewsAPI;
 import eu.fiveminutes.newsapp.business.dao.api.NewsService;
 import eu.fiveminutes.newsapp.business.dao.api.NewsServiceImpl;
 import eu.fiveminutes.newsapp.business.dao.api.converter.ApiConverter;
@@ -26,13 +27,19 @@ public final class ApiModule {
 
     @Provides
     @Singleton
-    NewsService provideNewsService(final Retrofit retrofit) {
-        return new NewsServiceImpl(retrofit);
+    NewsService provideNewsService(final NewsAPI newsAPI) {
+        return new NewsServiceImpl(newsAPI);
     }
 
     @Provides
     @Singleton
     ApiConverter provideApiConverter(){
         return new ApiConverterImpl();
+    }
+
+    @Provides
+    @Singleton
+    NewsAPI provideNewsAPI(final Retrofit retrofit){
+        return retrofit.create(NewsAPI.class);
     }
 }

@@ -9,8 +9,8 @@ public final class NewsServiceImpl implements NewsService{
 
     private final NewsAPI newsAPI;
 
-    public NewsServiceImpl(final Retrofit retrofit) {
-        this.newsAPI = retrofit.create(NewsAPI.class);
+    public NewsServiceImpl(final NewsAPI newsAPI) {
+        this.newsAPI = newsAPI;
     }
 
     @Override

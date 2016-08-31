@@ -18,7 +18,7 @@ import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
                 ActivityModule.class
         }
 )
-public interface ActivityComponent {
+public interface ActivityComponent extends ActivityComponentInjects{
 
     final class Initializer {
 
@@ -38,8 +38,5 @@ public interface ActivityComponent {
 
     NewsListAdapter getNewsListAdapter();
 
-    void injectNewsListFragment(NewsListFragment fragment);
-
-    void injectNewsDetailFragment(NewsDetailFragment fragment);
 }
 
