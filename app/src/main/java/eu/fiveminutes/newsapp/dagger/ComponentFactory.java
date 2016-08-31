@@ -5,7 +5,7 @@ import android.app.Activity;
 import eu.fiveminutes.newsapp.application.ApplicationComponent;
 import eu.fiveminutes.newsapp.application.NewsApplication;
 
-public class ComponentFactory {
+public final class ComponentFactory {
 
     private ComponentFactory() {}
 
