@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public final class NetworkService {
 
     public static final String BASE_URL = "http://api.nytimes.com";
-    private final NetworkAPI networkAPI;
+    private final NewsAPI networkAPI;
 
     public NetworkService() {
         this(BASE_URL);
@@ -18,10 +18,10 @@ public final class NetworkService {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        networkAPI = retrofit.create(NetworkAPI.class);
+        networkAPI = retrofit.create(NewsAPI.class);
     }
 
-    public NetworkAPI getAPI() {
+    public NewsAPI getAPI() {
         return networkAPI;
     }
 }

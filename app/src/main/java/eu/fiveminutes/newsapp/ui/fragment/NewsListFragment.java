@@ -16,16 +16,19 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import eu.fiveminutes.news_app_2.R;
-import eu.fiveminutes.newsapp.application.ObjectGraph;
+import eu.fiveminutes.newsapp.dagger.ActivityComponent;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 import eu.fiveminutes.newsapp.ui.adapter.NewsListAdapter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListView;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListViewModel;
+import eu.fiveminutes.newsapp.ui.presenter.TitleListener;
 
 public final class NewsListFragment extends BaseFragment implements NewsListView, OnRefreshListener {
 
@@ -33,6 +36,12 @@ public final class NewsListFragment extends BaseFragment implements NewsListView
 
         void showDetailFragment(NewsArticle article);
     }
+
+    @Inject
+    NewsListPresenter presenter;
+
+    @Inject
+    NewsListAdapter newsAdapter;
 
     @BindView(R.id.activity_main_news_list)
     protected ListView activityMainNewsList;
@@ -45,9 +54,6 @@ public final class NewsListFragment extends BaseFragment implements NewsListView
 
     @BindView(R.id.news_list_loading_bar)
     protected ProgressBar newsListLoadingBar;
-
-    private NewsListPresenter presenter;
-    private NewsListAdapter newsAdapter;
     private NewsListFragmentListener newsListFragmentListener;
 
     @Override
@@ -92,8 +98,8 @@ public final class NewsListFragment extends BaseFragment implements NewsListView
     }
 
     @Override
-    protected void inject(final ObjectGraph objectGraph) {
-        presenter = objectGraph.createNewsListPresenter();
+    protected void inject(final ActivityComponent activityComponent) {
+        activityComponent.injectNewsListFragment(this);
     }
 
     @OnItemClick(R.id.activity_main_news_list)
