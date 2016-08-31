@@ -19,13 +19,16 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.fiveminutes.news_app_2.R;
-import eu.fiveminutes.newsapp.application.ObjectGraph;
+import eu.fiveminutes.newsapp.dagger.ActivityComponent;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 import eu.fiveminutes.newsapp.ui.presenter.NewsDetailPresenter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsDetailView;
+import eu.fiveminutes.newsapp.ui.presenter.TitleListener;
 
 public final class NewsDetailFragment extends BaseFragment implements NewsDetailView {
 
@@ -34,7 +37,9 @@ public final class NewsDetailFragment extends BaseFragment implements NewsDetail
     private NewsArticle article;
     private NewsArticleParcelable articleParcelable;
     private TitleListener titleListener;
-    private NewsDetailPresenter presenter;
+
+    @Inject
+    NewsDetailPresenter presenter;
 
     @BindView(R.id.news_detail_fragment_web_view)
     protected WebView newsDetailWebView;
@@ -58,8 +63,8 @@ public final class NewsDetailFragment extends BaseFragment implements NewsDetail
     }
 
     @Override
-    protected void inject(final ObjectGraph objectGraph) {
-        presenter = objectGraph.provideNewsDetailPresenter();
+    protected void inject(final ActivityComponent activityComponent) {
+        activityComponent.injectNewsDetailFragment(this);
     }
 
     @Override

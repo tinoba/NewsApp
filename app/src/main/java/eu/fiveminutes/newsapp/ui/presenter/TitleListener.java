@@ -1,4 +1,4 @@
-package eu.fiveminutes.newsapp.ui.fragment;
+package eu.fiveminutes.newsapp.ui.presenter;
 
 public interface TitleListener {
 

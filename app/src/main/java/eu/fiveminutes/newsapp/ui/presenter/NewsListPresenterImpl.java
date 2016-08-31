@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.fiveminutes.news_app_2.R;
-import eu.fiveminutes.newsapp.business.dao.api.NetworkService;
+import eu.fiveminutes.newsapp.business.dao.api.NewsService;
 import eu.fiveminutes.newsapp.business.dao.api.converter.ApiConverter;
 import eu.fiveminutes.newsapp.business.dao.api.models.ApiNews;
 import eu.fiveminutes.newsapp.model.ArticleRepository;
@@ -22,7 +22,7 @@ import retrofit2.Response;
 public final class NewsListPresenterImpl implements NewsListPresenter {
 
     private final ApiConverter apiConverter;
-    private final NetworkService service;
+    private final NewsService service;
     private final ArticleRepository articleRepository;
     private final NetworkInformation networkInformation;
     private final ResourceUtils resourceUtils;
@@ -33,7 +33,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
 
     private boolean loadData = true;
 
-    public NewsListPresenterImpl(final ApiConverter apiConverter, final NetworkService service,
+    public NewsListPresenterImpl(final ApiConverter apiConverter, final NewsService service,
                                  final ArticleRepository articleRepository, final NetworkInformation networkInformation,
                                  final ResourceUtils resourceUtils) {
         this.apiConverter = apiConverter;
@@ -69,8 +69,7 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
     }
 
     private void getDataFromApi() {
-        final Call<ApiNews> call = service.getAPI().getNews();
-        call.enqueue(new GetNewsCallbackImpl(apiConverter, newsListViewWeakReference, this, resourceUtils));
+        service.getNews(new GetNewsCallbackImpl(apiConverter, newsListViewWeakReference, this, resourceUtils));
     }
 
     private void getDataFromDatabase() {
@@ -190,8 +189,6 @@ public final class NewsListPresenterImpl implements NewsListPresenter {
             if (view != null) {
                 if (result) {
                     Log.i("TAG", "News saved successfully");
-                } else {
-
                 }
             }
         }

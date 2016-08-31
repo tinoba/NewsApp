@@ -10,4 +10,6 @@
     <string name="newsdetailloadingimage">newsDetailLoadingImage</string>
     <string name="newslistloadingimage">newsListLoadingImage</string>
     <string name="news_detail_refresh">news_detail_refresh</string>
+    <string name="no_list_view">Provided Activity is not instance of NewsListView.</string>
+    <string name="no_detail_view">Provided Activity is not instance of NewsDetailView.</string>
 </resources>
