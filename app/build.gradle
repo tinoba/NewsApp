@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 23
@@ -25,6 +26,10 @@ android {
             buildConfigField "String", "NEWS_API_SERVICE_ENDOPINT", "\"http://api.nytimes.com\""
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -40,5 +45,8 @@ dependencies {
     compile 'com.jpardogo.googleprogressbar:library:1.2.0'
     apt "com.google.dagger:dagger-compiler:2.5"
     compile "com.google.dagger:dagger:2.5"
+    compile 'io.reactivex:rxjava:1.1.9'
+    compile 'io.reactivex:rxandroid:1.2.1'
     provided "javax.annotation:jsr250-api:1.0"
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
 }

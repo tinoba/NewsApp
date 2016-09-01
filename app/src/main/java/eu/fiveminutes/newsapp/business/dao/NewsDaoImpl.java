@@ -27,9 +27,12 @@ public final class NewsDaoImpl implements NewsDao {
     }
 
     @Override
-    public void insertArticle(final NewsArticle article) {
+    public void insertArticle(final List<NewsArticle> articles) {
         final SQLiteDatabase sqLiteDatabase = helper.getWritableDatabase();
-        sqLiteDatabase.insert(NewsArticleTable.TABLE_ARTICLES, null, mapToArticle(article));
+
+        for (NewsArticle article : articles) {
+            sqLiteDatabase.insert(NewsArticleTable.TABLE_ARTICLES, null, mapToArticle(article));
+        }
         sqLiteDatabase.close();
     }
 

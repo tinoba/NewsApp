@@ -3,6 +3,8 @@ package eu.fiveminutes.newsapp.model;
 import java.util.List;
 
 import eu.fiveminutes.newsapp.business.dao.NewsDao;
+import rx.Completable;
+import rx.Single;
 
 public final class ArticleRepositoryImpl implements ArticleRepository {
 
@@ -13,17 +15,17 @@ public final class ArticleRepositoryImpl implements ArticleRepository {
     }
 
     @Override
-    public void clearNewsTable() {
-        newsDao.deleteNews();
+    public Completable clearNewsTable() {
+        return Completable.fromAction(()-> newsDao.deleteNews());
     }
 
     @Override
-    public void insertNews(final NewsArticle article) {
-        newsDao.insertArticle(article);
+    public Completable insertNews(final List<NewsArticle> articles) {
+        return Completable.fromAction(()->newsDao.insertArticle(articles));
     }
 
     @Override
-    public List<NewsArticle> getAllNews() {
-        return newsDao.getAllArticles();
+    public Single<List<NewsArticle>> getAllNews() {
+        return Single.defer(() ->  Single.just(newsDao.getAllArticles()));
     }
 }

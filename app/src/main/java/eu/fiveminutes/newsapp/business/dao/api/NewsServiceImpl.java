@@ -1,11 +1,9 @@
 package eu.fiveminutes.newsapp.business.dao.api;
 
 import eu.fiveminutes.newsapp.business.dao.api.models.ApiNews;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
+import rx.Single;
 
-public final class NewsServiceImpl implements NewsService{
+public final class NewsServiceImpl implements NewsService {
 
     private final NewsAPI newsAPI;
 
@@ -14,8 +12,7 @@ public final class NewsServiceImpl implements NewsService{
     }
 
     @Override
-    public void getNews(final Callback<ApiNews> callback) {
-        final Call<ApiNews> call = newsAPI.getNews();
-        call.enqueue(callback);
+    public Single<ApiNews> getNews() {
+        return Single.defer(() -> newsAPI.getNews());
     }
 }

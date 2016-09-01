@@ -6,7 +6,7 @@ import eu.fiveminutes.newsapp.model.NewsArticle;
 
 public interface NewsDao {
 
-    void insertArticle(final NewsArticle article);
+    void insertArticle(final List<NewsArticle> article);
 
     List<NewsArticle> getAllArticles();
 

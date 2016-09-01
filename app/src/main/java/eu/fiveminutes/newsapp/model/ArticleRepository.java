@@ -2,11 +2,14 @@ package eu.fiveminutes.newsapp.model;
 
 import java.util.List;
 
+import rx.Completable;
+import rx.Single;
+
 public interface ArticleRepository {
 
-    List<NewsArticle> getAllNews();
+    Single<List<NewsArticle>> getAllNews();
 
-    void insertNews(final NewsArticle article);
+    Completable insertNews(final List<NewsArticle> articles);
 
-    void clearNewsTable();
+    Completable clearNewsTable();
 }
