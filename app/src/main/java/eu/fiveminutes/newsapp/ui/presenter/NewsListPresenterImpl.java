@@ -1,7 +1,8 @@
 package eu.fiveminutes.newsapp.ui.presenter;
 
+import android.util.Log;
+
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.List;
 
 import eu.fiveminutes.news_app_2.R;
@@ -11,7 +12,6 @@ import eu.fiveminutes.newsapp.model.ArticleRepository;
 import eu.fiveminutes.newsapp.model.NewsArticle;
 import eu.fiveminutes.newsapp.utils.NetworkInformation;
 import eu.fiveminutes.newsapp.utils.ResourceUtils;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -65,19 +65,18 @@ public final class NewsListPresenterImpl extends BasePresenter implements NewsLi
     }
 
     private void getDataFromApi() {
-        final Subscription subscription = newsService.getNews()
-                                               .subscribeOn(Schedulers.io())
-                                               .observeOn(AndroidSchedulers.mainThread())
-                                               .map(apiNews -> apiConverter.convertToNewsArticles(apiNews.response.docs))
-                                               .subscribe(newsArticles -> onGetDataFromApiCompleted(newsArticles), throwable -> onGetDataFromApiError());
-        addSubscribe(subscription);
+        addSubscription(newsService.getNews()
+                                   .map(apiNews -> apiConverter.convertToNewsArticles(apiNews.response.docs))
+                                   .subscribeOn(Schedulers.io())
+                                   .observeOn(AndroidSchedulers.mainThread())
+                                   .subscribe(newsArticles -> onGetDataFromApiCompleted(newsArticles), throwable -> onGetDataFromApiError()));
     }
 
     private void onGetDataFromApiError() {
         final NewsListView view = newsListViewWeakReference.get();
         if (view != null) {
             view.showErrorMessage(resourceUtils.getString(R.string.news_api_error_text));
-            view.renderView(new NewsListViewModel(false, new ArrayList<>(), false));
+            view.renderView(NewsListViewModel.EMPTY);
         }
     }
 
@@ -91,11 +90,14 @@ public final class NewsListPresenterImpl extends BasePresenter implements NewsLi
     }
 
     private void getDataFromDatabase() {
-        final Subscription subscription = articleRepository.getAllNews()
-                                                     .subscribeOn(Schedulers.io())
-                                                     .observeOn(AndroidSchedulers.mainThread())
-                                                     .subscribe(newsArticles -> onGetDataFromDatabaseSuccess(newsArticles));
-        addSubscribe(subscription);
+        addSubscription(articleRepository.getAllNews()
+                                         .subscribeOn(Schedulers.io())
+                                         .observeOn(AndroidSchedulers.mainThread())
+                                         .subscribe(newsArticles -> onGetDataFromDatabaseSuccess(newsArticles), throwable -> handleRxJavaError(throwable)));
+    }
+
+    private void handleRxJavaError(final Throwable throwable) {
+        Log.i("TAG", throwable.getMessage());
     }
 
     private void onGetDataFromDatabaseSuccess(final List<NewsArticle> newsArticles) {
@@ -103,7 +105,7 @@ public final class NewsListPresenterImpl extends BasePresenter implements NewsLi
 
         if (view != null) {
             if (newsArticles.isEmpty()) {
-                view.renderView(new NewsListViewModel(false, new ArrayList<>(), true));
+                view.renderView(NewsListViewModel.EMPTY);
             } else {
                 NewsListPresenterImpl.this.articles = newsArticles;
                 view.renderView(new NewsListViewModel(false, newsArticles, false));
@@ -112,18 +114,17 @@ public final class NewsListPresenterImpl extends BasePresenter implements NewsLi
     }
 
     private void onDeleteNewsTaskCompleted(final List<NewsArticle> articles) {
-        final Subscription subscription = articleRepository.insertNews(articles)
-                                                     .subscribeOn(Schedulers.io())
-                                                     .observeOn(AndroidSchedulers.mainThread())
-                                                     .subscribe();
-        addSubscribe(subscription);
+        addSubscription(articleRepository.insertNews(articles)
+                                         .subscribeOn(Schedulers.io())
+                                         .observeOn(AndroidSchedulers.mainThread())
+                                         .subscribe(() -> {
+                                         }, throwable -> handleRxJavaError(throwable)));
     }
 
     private void addNewsToDatabase(final List<NewsArticle> articles) {
-        final Subscription subscription = articleRepository.clearNewsTable()
-                                                     .subscribeOn(Schedulers.io())
-                                                     .observeOn(AndroidSchedulers.mainThread())
-                                                     .subscribe(() -> onDeleteNewsTaskCompleted(articles));
-        addSubscribe(subscription);
+        addSubscription(articleRepository.clearNewsTable()
+                                         .subscribeOn(Schedulers.io())
+                                         .observeOn(AndroidSchedulers.mainThread())
+                                         .subscribe(() -> onDeleteNewsTaskCompleted(articles), throwable -> handleRxJavaError(throwable)));
     }
 }

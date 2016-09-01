@@ -7,7 +7,7 @@ public abstract class BasePresenter {
 
     private CompositeSubscription compositeSubscription;
 
-    void addSubscribe(final Subscription subscription) {
+    void addSubscription(final Subscription subscription) {
         if (compositeSubscription == null || compositeSubscription.isUnsubscribed()) {
             compositeSubscription = new CompositeSubscription();
         }
