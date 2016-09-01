@@ -30,7 +30,7 @@ public final class NewsDaoImpl implements NewsDao {
     public void insertArticle(final List<NewsArticle> articles) {
         final SQLiteDatabase sqLiteDatabase = helper.getWritableDatabase();
 
-        for (NewsArticle article : articles) {
+        for (final NewsArticle article : articles) {
             sqLiteDatabase.insert(NewsArticleTable.TABLE_ARTICLES, null, mapToArticle(article));
         }
         sqLiteDatabase.close();
