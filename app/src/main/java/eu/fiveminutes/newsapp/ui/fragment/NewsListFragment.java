@@ -95,7 +95,7 @@ public final class NewsListFragment extends BaseFragment implements NewsListView
     @Override
     public void onPause() {
         super.onPause();
-        presenter.unSubscribe();
+        presenter.unsubscribe();
     }
 
     @Override

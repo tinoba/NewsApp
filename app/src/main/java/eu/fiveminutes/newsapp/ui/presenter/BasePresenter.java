@@ -14,8 +14,8 @@ public abstract class BasePresenter {
         compositeSubscription.add(subscription);
     }
 
-    public void unSubscribe() {
-        if (compositeSubscription == null) {
+    public void unsubscribe() {
+        if (compositeSubscription != null) {
             compositeSubscription.unsubscribe();
         }
     }

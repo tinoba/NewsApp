@@ -65,7 +65,7 @@ public final class NewsListPresenterImpl extends BasePresenter implements NewsLi
     }
 
     private void getDataFromApi() {
-        Subscription subscription = newsService.getNews()
+        final Subscription subscription = newsService.getNews()
                                                .subscribeOn(Schedulers.io())
                                                .observeOn(AndroidSchedulers.mainThread())
                                                .map(apiNews -> apiConverter.convertToNewsArticles(apiNews.response.docs))
@@ -91,7 +91,7 @@ public final class NewsListPresenterImpl extends BasePresenter implements NewsLi
     }
 
     private void getDataFromDatabase() {
-        Subscription subscription = articleRepository.getAllNews()
+        final Subscription subscription = articleRepository.getAllNews()
                                                      .subscribeOn(Schedulers.io())
                                                      .observeOn(AndroidSchedulers.mainThread())
                                                      .subscribe(newsArticles -> onGetDataFromDatabaseSuccess(newsArticles));
@@ -112,7 +112,7 @@ public final class NewsListPresenterImpl extends BasePresenter implements NewsLi
     }
 
     private void onDeleteNewsTaskCompleted(final List<NewsArticle> articles) {
-        Subscription subscription = articleRepository.insertNews(articles)
+        final Subscription subscription = articleRepository.insertNews(articles)
                                                      .subscribeOn(Schedulers.io())
                                                      .observeOn(AndroidSchedulers.mainThread())
                                                      .subscribe();
@@ -120,7 +120,7 @@ public final class NewsListPresenterImpl extends BasePresenter implements NewsLi
     }
 
     private void addNewsToDatabase(final List<NewsArticle> articles) {
-        Subscription subscription = articleRepository.clearNewsTable()
+        final Subscription subscription = articleRepository.clearNewsTable()
                                                      .subscribeOn(Schedulers.io())
                                                      .observeOn(AndroidSchedulers.mainThread())
                                                      .subscribe(() -> onDeleteNewsTaskCompleted(articles));

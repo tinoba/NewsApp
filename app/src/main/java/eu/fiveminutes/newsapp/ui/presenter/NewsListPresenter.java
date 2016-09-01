@@ -8,5 +8,5 @@ public interface NewsListPresenter {
 
     void setView(NewsListView view);
 
-    void unSubscribe();
+    void unsubscribe();
 }
