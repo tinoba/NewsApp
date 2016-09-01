@@ -98,7 +98,7 @@ public final class NewsListPresenterImpl extends BasePresenter implements NewsLi
         addSubscribe(subscription);
     }
 
-    private void onGetDataFromDatabaseSuccess(List<NewsArticle> newsArticles) {
+    private void onGetDataFromDatabaseSuccess(final List<NewsArticle> newsArticles) {
         final NewsListView view = newsListViewWeakReference.get();
 
         if (view != null) {
@@ -111,7 +111,7 @@ public final class NewsListPresenterImpl extends BasePresenter implements NewsLi
         }
     }
 
-    private void onDeleteNewsTaskCompleted(List<NewsArticle> articles) {
+    private void onDeleteNewsTaskCompleted(final List<NewsArticle> articles) {
         Subscription subscription = articleRepository.insertNews(articles)
                                                      .subscribeOn(Schedulers.io())
                                                      .observeOn(AndroidSchedulers.mainThread())
