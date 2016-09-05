@@ -16,6 +16,9 @@ import eu.fiveminutes.newsapp.utils.NetworkInformation;
 import eu.fiveminutes.newsapp.utils.ResourceUtils;
 import rx.Scheduler;
 
+import static eu.fiveminutes.newsapp.dagger.ThreadingModule.OBSERVE_SCHEDULER;
+import static eu.fiveminutes.newsapp.dagger.ThreadingModule.SUBSCRIBE_SCHEDULER;
+
 @Singleton
 @Component(
         modules = {
@@ -52,9 +55,9 @@ public interface ApplicationComponent extends ApplicationComponentInjects {
 
     ArticleRepository articleRepository();
 
-    @Named("MainThreadScheduler")
-    Scheduler getMainThreadScheduler();
+    @Named(OBSERVE_SCHEDULER)
+    Scheduler getObserveScheduler();
 
-    @Named("IoScheduler")
-    Scheduler getIoScheduler();
+    @Named(SUBSCRIBE_SCHEDULER)
+    Scheduler getSubscribeScheduler();
 }

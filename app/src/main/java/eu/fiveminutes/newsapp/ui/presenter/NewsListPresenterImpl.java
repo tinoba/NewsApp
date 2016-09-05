@@ -5,7 +5,6 @@ import android.util.Log;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import eu.fiveminutes.news_app_2.R;
@@ -17,16 +16,18 @@ import eu.fiveminutes.newsapp.utils.NetworkInformation;
 import eu.fiveminutes.newsapp.utils.ResourceUtils;
 import rx.Scheduler;
 
-public final class NewsListPresenterImpl extends BasePresenter implements NewsListPresenter {
+import static eu.fiveminutes.newsapp.dagger.ThreadingModule.OBSERVE_SCHEDULER;
+import static eu.fiveminutes.newsapp.dagger.ThreadingModule.SUBSCRIBE_SCHEDULER;
 
+public final class NewsListPresenterImpl extends BasePresenter implements NewsListPresenter {
 
     private final ApiConverter apiConverter;
     private final NewsService newsService;
     private final ArticleRepository articleRepository;
     private final NetworkInformation networkInformation;
     private final ResourceUtils resourceUtils;
-    private final Scheduler mainThreadScheduler;
-    private final Scheduler ioScheduler;
+    private final Scheduler observeScheduler;
+    private final Scheduler subscribeScheduler;
 
     private WeakReference<NewsListView> newsListViewWeakReference;
 
@@ -36,14 +37,14 @@ public final class NewsListPresenterImpl extends BasePresenter implements NewsLi
 
     public NewsListPresenterImpl(final ApiConverter apiConverter, final NewsService newsService, final ArticleRepository articleRepository,
                                  final NetworkInformation networkInformation, final ResourceUtils resourceUtils,
-                                 @Named("MainThreadScheduler") final Scheduler mainThreadScheduler, @Named("IoScheduler") final Scheduler ioScheduler) {
+                                 @Named(OBSERVE_SCHEDULER) final Scheduler observeScheduler, @Named(SUBSCRIBE_SCHEDULER) final Scheduler subscribeScheduler) {
         this.apiConverter = apiConverter;
         this.newsService = newsService;
         this.articleRepository = articleRepository;
         this.networkInformation = networkInformation;
         this.resourceUtils = resourceUtils;
-        this.mainThreadScheduler = mainThreadScheduler;
-        this.ioScheduler = ioScheduler;
+        this.observeScheduler = observeScheduler;
+        this.subscribeScheduler = subscribeScheduler;
     }
 
     @Override
@@ -74,8 +75,8 @@ public final class NewsListPresenterImpl extends BasePresenter implements NewsLi
     private void getDataFromApi() {
         addSubscription(newsService.getNews()
                                    .map(apiNews -> apiConverter.convertToNewsArticles(apiNews.response.docs))
-                                   .subscribeOn(ioScheduler)
-                                   .observeOn(mainThreadScheduler)
+                                   .subscribeOn(subscribeScheduler)
+                                   .observeOn(observeScheduler)
                                    .subscribe(this::onGetDataFromApiCompleted, this::onGetDataFromApiError));
     }
 
@@ -98,8 +99,8 @@ public final class NewsListPresenterImpl extends BasePresenter implements NewsLi
 
     private void getDataFromDatabase() {
         addSubscription(articleRepository.getAllNews()
-                                         .subscribeOn(ioScheduler)
-                                         .observeOn(mainThreadScheduler)
+                                         .subscribeOn(subscribeScheduler)
+                                         .observeOn(observeScheduler)
                                          .subscribe(this::onGetDataFromDatabaseSuccess, this::handleRxJavaError));
     }
 
@@ -122,16 +123,16 @@ public final class NewsListPresenterImpl extends BasePresenter implements NewsLi
 
     private void onDeleteNewsTaskCompleted(final List<NewsArticle> articles) {
         addSubscription(articleRepository.insertNews(articles)
-                                         .subscribeOn(ioScheduler)
-                                         .observeOn(mainThreadScheduler)
+                                         .subscribeOn(subscribeScheduler)
+                                         .observeOn(observeScheduler)
                                          .subscribe(() -> {
                                          }, this::handleRxJavaError));
     }
 
     private void addNewsToDatabase(final List<NewsArticle> articles) {
         addSubscription(articleRepository.clearNewsTable()
-                                         .subscribeOn(ioScheduler)
-                                         .observeOn(mainThreadScheduler)
+                                         .subscribeOn(subscribeScheduler)
+                                         .observeOn(observeScheduler)
                                          .subscribe(() -> onDeleteNewsTaskCompleted(articles), this::handleRxJavaError));
     }
 }

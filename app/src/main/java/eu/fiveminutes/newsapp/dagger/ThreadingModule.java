@@ -12,16 +12,19 @@ import rx.schedulers.Schedulers;
 @Module
 public final class ThreadingModule {
 
+    public static final String OBSERVE_SCHEDULER = "SubscribeScheduler";
+    public static final String SUBSCRIBE_SCHEDULER = "ObserveScheduler";
+
     @Provides
     @Singleton
-    @Named("MainThreadScheduler")
+    @Named(OBSERVE_SCHEDULER)
     Scheduler provideAndroidSchedulersMainThread() {
         return AndroidSchedulers.mainThread();
     }
 
     @Provides
     @Singleton
-    @Named("IoScheduler")
+    @Named(SUBSCRIBE_SCHEDULER)
     Scheduler provideSchedulersIo() {
         return Schedulers.io();
     }
