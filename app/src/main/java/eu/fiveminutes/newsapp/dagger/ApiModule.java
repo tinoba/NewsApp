@@ -10,8 +10,11 @@ import eu.fiveminutes.newsapp.business.dao.api.NewsService;
 import eu.fiveminutes.newsapp.business.dao.api.NewsServiceImpl;
 import eu.fiveminutes.newsapp.business.dao.api.converter.ApiConverter;
 import eu.fiveminutes.newsapp.business.dao.api.converter.ApiConverterImpl;
+import eu.fiveminutes.newsapp.business.dao.api.models.ApiNews;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Single;
 
 @Module
 public final class ApiModule {
@@ -22,12 +25,13 @@ public final class ApiModule {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.NEWS_API_SERVICE_ENDOPINT)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
     }
 
     @Provides
     @Singleton
-    NewsService provideNewsService(final NewsAPI newsAPI) {
+    NewsService provideApiNewsSingle(final NewsAPI newsAPI) {
         return new NewsServiceImpl(newsAPI);
     }
 

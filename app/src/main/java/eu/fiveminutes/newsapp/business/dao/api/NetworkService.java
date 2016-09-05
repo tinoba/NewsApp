@@ -1,6 +1,7 @@
 package eu.fiveminutes.newsapp.business.dao.api;
 
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public final class NetworkService {
@@ -16,6 +17,7 @@ public final class NetworkService {
         final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
         networkAPI = retrofit.create(NewsAPI.class);

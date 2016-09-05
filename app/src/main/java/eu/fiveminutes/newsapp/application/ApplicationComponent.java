@@ -1,5 +1,6 @@
 package eu.fiveminutes.newsapp.application;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -8,10 +9,15 @@ import eu.fiveminutes.newsapp.business.dao.api.converter.ApiConverter;
 import eu.fiveminutes.newsapp.dagger.ApiModule;
 import eu.fiveminutes.newsapp.dagger.ApplicationModule;
 import eu.fiveminutes.newsapp.dagger.DatabaseModule;
+import eu.fiveminutes.newsapp.dagger.ThreadingModule;
 import eu.fiveminutes.newsapp.dagger.UtilsModule;
 import eu.fiveminutes.newsapp.model.ArticleRepository;
 import eu.fiveminutes.newsapp.utils.NetworkInformation;
 import eu.fiveminutes.newsapp.utils.ResourceUtils;
+import rx.Scheduler;
+
+import static eu.fiveminutes.newsapp.dagger.ThreadingModule.OBSERVE_SCHEDULER;
+import static eu.fiveminutes.newsapp.dagger.ThreadingModule.SUBSCRIBE_SCHEDULER;
 
 @Singleton
 @Component(
@@ -19,7 +25,8 @@ import eu.fiveminutes.newsapp.utils.ResourceUtils;
                 ApplicationModule.class,
                 ApiModule.class,
                 UtilsModule.class,
-                DatabaseModule.class
+                DatabaseModule.class,
+                ThreadingModule.class
         }
 )
 
@@ -47,4 +54,10 @@ public interface ApplicationComponent extends ApplicationComponentInjects {
     ApiConverter getApiConverter();
 
     ArticleRepository articleRepository();
+
+    @Named(OBSERVE_SCHEDULER)
+    Scheduler getObserveScheduler();
+
+    @Named(SUBSCRIBE_SCHEDULER)
+    Scheduler getSubscribeScheduler();
 }

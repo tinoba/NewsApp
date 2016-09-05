@@ -5,8 +5,6 @@ import android.app.Activity;
 import dagger.Component;
 import eu.fiveminutes.newsapp.application.ApplicationComponent;
 import eu.fiveminutes.newsapp.ui.adapter.NewsListAdapter;
-import eu.fiveminutes.newsapp.ui.fragment.NewsDetailFragment;
-import eu.fiveminutes.newsapp.ui.fragment.NewsListFragment;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
 
 @ForActivity
@@ -18,7 +16,7 @@ import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
                 ActivityModule.class
         }
 )
-public interface ActivityComponent extends ActivityComponentInjects{
+public interface ActivityComponent extends ActivityComponentInjects {
 
     final class Initializer {
 
@@ -31,12 +29,10 @@ public interface ActivityComponent extends ActivityComponentInjects{
                                           .activityModule(new ActivityModule(activity))
                                           .build();
         }
-
     }
 
     NewsListPresenter getNewsListPresenter();
 
     NewsListAdapter getNewsListAdapter();
-
 }
 
