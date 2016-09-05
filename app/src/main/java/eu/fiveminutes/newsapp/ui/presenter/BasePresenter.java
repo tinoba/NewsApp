@@ -7,15 +7,15 @@ public abstract class BasePresenter {
 
     private CompositeSubscription compositeSubscription;
 
-    void addSubscribe(final Subscription subscription) {
+    void addSubscription(final Subscription subscription) {
         if (compositeSubscription == null || compositeSubscription.isUnsubscribed()) {
             compositeSubscription = new CompositeSubscription();
         }
         compositeSubscription.add(subscription);
     }
 
-    public void unSubscribe() {
-        if (compositeSubscription == null) {
+    public void unsubscribe() {
+        if (compositeSubscription != null) {
             compositeSubscription.unsubscribe();
         }
     }
