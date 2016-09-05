@@ -16,12 +16,12 @@ public final class ArticleRepositoryImpl implements ArticleRepository {
 
     @Override
     public Completable clearNewsTable() {
-        return Completable.fromAction(() -> newsDao.deleteNews());
+        return Completable.defer(() -> Completable.fromAction(() -> newsDao.deleteNews()));
     }
 
     @Override
     public Completable insertNews(final List<NewsArticle> articles) {
-        return Completable.fromAction(() -> newsDao.insertArticle(articles));
+        return Completable.defer(() -> Completable.fromAction(() -> newsDao.insertArticle(articles)));
     }
 
     @Override
