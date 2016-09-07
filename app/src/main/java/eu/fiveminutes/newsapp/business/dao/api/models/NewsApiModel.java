@@ -2,12 +2,12 @@ package eu.fiveminutes.newsapp.business.dao.api.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ApiNews {
+public class NewsApiModel {
 
-    public static final ApiNews EMPTY_API_NEWS = new ApiNews(ApiResponse.EMPT_API_RESPONSE);
+    public static final NewsApiModel EMPTY_API_NEWS = new NewsApiModel(ResponseApiModel.EMPT_API_RESPONSE);
 
     @SerializedName("response")
-    public ApiResponse response;
+    public ResponseApiModel response;
 
     @SerializedName("status")
     public String status;
@@ -15,10 +15,10 @@ public class ApiNews {
     @SerializedName("copyright")
     public String copyright;
 
-    public ApiNews(final ApiResponse response) {
+    public NewsApiModel(final ResponseApiModel response) {
         this.response = response;
     }
 
-    public ApiNews() {
+    public NewsApiModel() {
     }
 }

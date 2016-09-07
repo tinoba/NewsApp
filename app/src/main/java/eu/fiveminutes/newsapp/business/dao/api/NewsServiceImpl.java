@@ -1,6 +1,6 @@
 package eu.fiveminutes.newsapp.business.dao.api;
 
-import eu.fiveminutes.newsapp.business.dao.api.models.ApiNews;
+import eu.fiveminutes.newsapp.business.dao.api.models.NewsApiModel;
 import rx.Single;
 
 public final class NewsServiceImpl implements NewsService {
@@ -12,7 +12,7 @@ public final class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public Single<ApiNews> getNews() {
+    public Single<NewsApiModel> getNews() {
         return Single.defer(() -> newsAPI.getNews());
     }
 }

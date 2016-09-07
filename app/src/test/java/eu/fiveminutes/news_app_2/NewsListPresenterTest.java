@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import eu.fiveminutes.newsapp.business.dao.api.NewsService;
 import eu.fiveminutes.newsapp.business.dao.api.converter.ApiConverter;
-import eu.fiveminutes.newsapp.business.dao.api.models.ApiNews;
+import eu.fiveminutes.newsapp.business.dao.api.models.NewsApiModel;
 import eu.fiveminutes.newsapp.model.ArticleRepository;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenterImpl;
@@ -65,7 +65,7 @@ public class NewsListPresenterTest {
     public void downloadFromApiReturnsTrue() throws Exception {
         Mockito.when(networkInformation.isConnected()).thenReturn(true);
         Mockito.when(articleRepository.clearNewsTable()).thenReturn(Completable.complete());
-        Mockito.when(networkService.getNews()).thenReturn(Single.just(ApiNews.EMPTY_API_NEWS));
+        Mockito.when(networkService.getNews()).thenReturn(Single.just(NewsApiModel.EMPTY_API_NEWS));
 
         newsListPresenter.setView(mockListView);
         newsListPresenter.loadNews();

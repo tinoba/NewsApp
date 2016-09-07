@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Collections;
 import java.util.List;
 
-public final class ApiDocs {
+public final class DocsApiModel {
 
-    public static final List<ApiDocs> EMPTY_API_DOCS = Collections.unmodifiableList(Collections.emptyList());
+    public static final List<DocsApiModel> EMPTY_API_DOCS = Collections.unmodifiableList(Collections.emptyList());
 
     @SerializedName("web_url")
     public String webUrl;
