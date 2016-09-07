@@ -11,9 +11,7 @@ import java.util.ArrayList;
 
 import eu.fiveminutes.newsapp.business.dao.api.NewsService;
 import eu.fiveminutes.newsapp.business.dao.api.converter.ApiConverter;
-import eu.fiveminutes.newsapp.business.dao.api.models.ApiDocs;
 import eu.fiveminutes.newsapp.business.dao.api.models.ApiNews;
-import eu.fiveminutes.newsapp.business.dao.api.models.ApiResponse;
 import eu.fiveminutes.newsapp.model.ArticleRepository;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
 import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenterImpl;
@@ -21,9 +19,9 @@ import eu.fiveminutes.newsapp.ui.presenter.NewsListView;
 import eu.fiveminutes.newsapp.utils.NetworkInformation;
 import eu.fiveminutes.newsapp.utils.ResourceUtils;
 import rx.Completable;
-import rx.Scheduler;
 import rx.Single;
 import rx.schedulers.Schedulers;
+import rx.schedulers.TestScheduler;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
@@ -34,53 +32,61 @@ public class NewsListPresenterTest {
 
     @Mock
     public NetworkInformation networkInformation;
+
     @Mock
     private NewsListView newsListView;
+
     @Mock
     private NewsListPresenter newsListPresenter;
     @Mock
     private ApiConverter apiConverter;
+
     @Mock
     private NewsService networkService;
+
     @Mock
     private ArticleRepository articleRepository;
+
     @Mock
     private ResourceUtils resourceUtils;
+
     @Mock
     private NewsListView mockListView;
 
+    private final TestScheduler testScheduler = Schedulers.test();
+
     @Before
     public void setUp() throws Exception {
-        Scheduler subscribeScheduler = Schedulers.immediate();
-        Scheduler observeScheduler = Schedulers.immediate();
-
         newsListPresenter = new NewsListPresenterImpl(apiConverter, networkService, articleRepository, networkInformation, resourceUtils,
-                                                      observeScheduler, subscribeScheduler);
+                                                      testScheduler, testScheduler);
     }
 
     @Test
-    public void DownloadFromApiReturnsTrue() throws Exception {
-        ApiNews apiNews = new ApiNews();
-        apiNews.response = new ApiResponse();
-        apiNews.response.docs = ApiDocs.EMPTY_API_DOCS;
+    public void downloadFromApiReturnsTrue() throws Exception {
         Mockito.when(networkInformation.isConnected()).thenReturn(true);
         Mockito.when(articleRepository.clearNewsTable()).thenReturn(Completable.complete());
-        Mockito.when(networkService.getNews()).thenReturn(Single.just(apiNews));
+        Mockito.when(networkService.getNews()).thenReturn(Single.just(ApiNews.EMPTY_API_NEWS));
 
         newsListPresenter.setView(mockListView);
         newsListPresenter.loadNews();
 
+        testScheduler.triggerActions();
+
         Mockito.verify(networkService, Mockito.times(1)).getNews();
-        Mockito.verify(mockListView, Mockito.times(0)).showErrorMessage(any());
+        Mockito.verify(mockListView, Mockito.never()).showErrorMessage(any());
+        Mockito.verify(apiConverter, Mockito.times(1)).convertToNewsArticles(any());
+        Mockito.verify(mockListView, Mockito.times(1)).renderView(any());
     }
 
     @Test
-    public void DownloadFromApiReturnsFalse() throws Exception {
+    public void downloadFromApiReturnsFalse() throws Exception {
         Mockito.when(networkInformation.isConnected()).thenReturn(true);
         Mockito.when(networkService.getNews()).thenReturn(Single.error(new RuntimeException()));
 
         newsListPresenter.setView(mockListView);
         newsListPresenter.loadNews();
+
+        testScheduler.triggerActions();
 
         verifyZeroInteractions(articleRepository);
         Mockito.verify(networkService, Mockito.times(1)).getNews();
@@ -95,6 +101,8 @@ public class NewsListPresenterTest {
         newsListPresenter.setView(mockListView);
         newsListPresenter.loadNews();
 
+        testScheduler.triggerActions();
+
         Mockito.verify(articleRepository, Mockito.times(1)).getAllNews();
         Mockito.verifyZeroInteractions(mockListView);
     }
@@ -106,6 +114,8 @@ public class NewsListPresenterTest {
 
         newsListPresenter.setView(mockListView);
         newsListPresenter.loadNews();
+
+        testScheduler.triggerActions();
 
         Mockito.verify(mockListView, times(1)).renderView(any());
         Mockito.verify(articleRepository, Mockito.times(1)).getAllNews();
