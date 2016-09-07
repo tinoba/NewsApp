@@ -59,7 +59,7 @@ public class NewsListPresenterTest {
     }
 
     @Test
-    public void networkValidatorReturnsTrue() throws Exception {
+    public void DownloadFromApiReturnsTrue() throws Exception {
         ApiNews apiNews = new ApiNews();
         apiNews.response = new ApiResponse();
         apiNews.response.docs = ApiDocs.EMPTY_API_DOCS;
@@ -75,7 +75,7 @@ public class NewsListPresenterTest {
     }
 
     @Test
-    public void networkTrueValidatorReturnsFalse() throws Exception {
+    public void DownloadFromApiReturnsFalse() throws Exception {
         Mockito.when(networkInformation.isConnected()).thenReturn(true);
         Mockito.when(networkService.getNews()).thenReturn(Single.error(new RuntimeException()));
 
@@ -88,7 +88,7 @@ public class NewsListPresenterTest {
     }
 
     @Test
-    public void networFalsekValidatorReturnsFalse() throws Exception {
+    public void downloadFromDatabaseReturnFalse() throws Exception {
         Mockito.when(networkInformation.isConnected()).thenReturn(false);
         Mockito.when(articleRepository.getAllNews()).thenReturn(Single.error(new RuntimeException()));
 
@@ -100,7 +100,7 @@ public class NewsListPresenterTest {
     }
 
     @Test
-    public void networFalseValidatorReturnsTrue() throws Exception {
+    public void downloadFromDatabaseReturnTrue() throws Exception {
         Mockito.when(networkInformation.isConnected()).thenReturn(false);
         Mockito.when(articleRepository.getAllNews()).thenReturn(Single.just(new ArrayList<>()));
 
