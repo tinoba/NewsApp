@@ -1,7 +1,5 @@
 package eu.fiveminutes.newsapp.ui.presenter;
 
-import android.util.Log;
-
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -105,7 +103,7 @@ public final class NewsListPresenterImpl extends BasePresenter implements NewsLi
     }
 
     private void handleRxJavaError(final Throwable throwable) {
-        Log.i("TAG", throwable.getMessage());
+//        Log.i("TAG", throwable.getMessage());
     }
 
     private void onGetDataFromDatabaseSuccess(final List<NewsArticle> newsArticles) {
