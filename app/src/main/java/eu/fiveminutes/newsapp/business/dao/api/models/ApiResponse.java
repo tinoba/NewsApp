@@ -6,7 +6,7 @@ import java.util.List;
 
 public final class ApiResponse {
 
-    public static final ApiResponse EMPT_API_RESPONSE = new ApiResponse(ApiDocs.EMPTY_API_DOCS, new ApiMeta());
+    public static final ApiResponse EMPT_API_RESPONSE = new ApiResponse(ApiDocs.EMPTY_API_DOCS);
 
     @SerializedName("docs")
     public List<ApiDocs> docs;
@@ -14,8 +14,7 @@ public final class ApiResponse {
     @SerializedName("meta")
     public ApiMeta meta;
 
-    public ApiResponse(final List<ApiDocs> docs, final ApiMeta meta) {
+    public ApiResponse(final List<ApiDocs> docs) {
         this.docs = docs;
-        this.meta = meta;
     }
 }
