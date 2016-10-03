@@ -2,7 +2,8 @@ package eu.fiveminutes.newsapp.application;
 
 import android.app.Application;
 
-import eu.fiveminutes.newsapp.dagger.ComponentFactory;
+import eu.fiveminutes.newsapp.injection.ComponentFactory;
+import eu.fiveminutes.newsapp.injection.component.ApplicationComponent;
 
 public final class NewsApplication extends Application {
 

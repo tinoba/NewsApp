@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.fiveminutes.news_app_2.R;
-import eu.fiveminutes.newsapp.model.NewsArticle;
+import eu.fiveminutes.newsapp.domain.model.NewsArticle;
 
 public final class NewsListAdapter extends ArrayAdapter<NewsArticle> {
 

@@ -9,15 +9,15 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 
-import eu.fiveminutes.newsapp.business.dao.api.NewsService;
-import eu.fiveminutes.newsapp.business.dao.api.converter.ApiConverter;
-import eu.fiveminutes.newsapp.business.dao.api.models.NewsApiModel;
-import eu.fiveminutes.newsapp.model.ArticleRepository;
-import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenter;
-import eu.fiveminutes.newsapp.ui.presenter.NewsListPresenterImpl;
-import eu.fiveminutes.newsapp.ui.presenter.NewsListView;
-import eu.fiveminutes.newsapp.utils.NetworkInformation;
-import eu.fiveminutes.newsapp.utils.ResourceUtils;
+import eu.fiveminutes.newsapp.data.service.NewsService;
+import eu.fiveminutes.newsapp.data.api.converter.ApiConverter;
+import eu.fiveminutes.newsapp.data.api.models.NewsApiModel;
+import eu.fiveminutes.newsapp.domain.repository.ArticleRepository;
+import eu.fiveminutes.newsapp.ui.content.news.presenter.NewsListPresenter;
+import eu.fiveminutes.newsapp.ui.content.news.presenter.NewsListPresenterImpl;
+import eu.fiveminutes.newsapp.ui.content.news.view.NewsListView;
+import eu.fiveminutes.newsapp.util.NetworkInformation;
+import eu.fiveminutes.newsapp.util.ResourceUtils;
 import rx.Completable;
 import rx.Single;
 import rx.schedulers.Schedulers;

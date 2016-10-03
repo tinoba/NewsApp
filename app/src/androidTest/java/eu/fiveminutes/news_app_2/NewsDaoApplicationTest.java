@@ -8,10 +8,10 @@ import junit.framework.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.fiveminutes.newsapp.business.dao.DatabaseHelper;
-import eu.fiveminutes.newsapp.business.dao.NewsDao;
-import eu.fiveminutes.newsapp.business.dao.NewsDaoImpl;
-import eu.fiveminutes.newsapp.model.NewsArticle;
+import eu.fiveminutes.newsapp.data.dao.DatabaseHelper;
+import eu.fiveminutes.newsapp.data.dao.NewsDao;
+import eu.fiveminutes.newsapp.data.dao.NewsDaoImpl;
+import eu.fiveminutes.newsapp.domain.model.NewsArticle;
 
 public class NewsDaoApplicationTest extends AndroidTestCase {
 
